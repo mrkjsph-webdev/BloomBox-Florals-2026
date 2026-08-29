@@ -1,0 +1,178 @@
+/* =====================================================
+   CONTACT SECTION
+===================================================== */
+
+.contact-section {
+  width: 100%;
+
+  padding: 70px 7% 25px;
+
+  color: white;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("../../assets/images/bloombox-florals.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.contact-header {
+  text-align: center;
+
+  margin-bottom: 55px;
+}
+
+.contact-header h2 {
+  margin: 0 0 10px;
+
+  color: white;
+
+  font-family: Georgia, serif;
+
+  font-size: 38px;
+}
+
+.contact-header p {
+  margin: 0;
+
+  color: #f8e9ec;
+
+  font-size: 17px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.contact-content {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 50px;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   COLUMNS
+===================================================== */
+
+.contact-column {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  flex: 1;
+}
+
+.contact-column h3 {
+  margin: 0 0 10px;
+
+  color: #ffe09a;
+
+  font-family: Georgia, serif;
+
+  font-size: 21px;
+}
+
+.contact-column a,
+.contact-column p {
+  margin: 0;
+
+  color: #f8e9ec;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+
+  text-decoration: none;
+}
+
+.contact-column a:hover {
+  color: #ffe09a;
+}
+
+
+/* =====================================================
+   BOTTOM
+===================================================== */
+
+.contact-bottom {
+  max-width: 1100px;
+
+  margin: 55px auto 0;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+  text-align: center;
+}
+
+.contact-bottom p {
+  margin: 0;
+
+  color: #f8e9ec;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .contact-section {
+    padding: 55px 25px 25px;
+  }
+
+  .contact-header {
+    margin-bottom: 40px;
+  }
+
+  .contact-header h2 {
+    font-size: 32px;
+  }
+
+  .contact-header p {
+    font-size: 15px;
+  }
+
+  .contact-content {
+    flex-direction: column;
+
+    gap: 35px;
+
+    text-align: center;
+  }
+
+  .contact-column {
+    align-items: center;
+  }
+
+  .contact-column h3 {
+    font-size: 20px;
+  }
+
+  .contact-bottom {
+    margin-top: 40px;
+  }
+
+}

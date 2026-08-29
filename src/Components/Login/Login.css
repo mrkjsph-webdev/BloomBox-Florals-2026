@@ -1,0 +1,11 @@
+.Login {
+    background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("../../assets/images/bloombox-florals.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
