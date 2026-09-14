@@ -1,0 +1,528 @@
+.customizer-page{min-height:100vh;color:#2e1c23;background:#fff}.customizer-header{display:flex;justify-content:space-between;align-items:center;padding:18px 6%;border-bottom:1px solid #eadcdf}.customizer-brand{color:#3b0518;font:700 24px Georgia,serif;text-decoration:none}.customizer-brand span{color:#935466;font-weight:400}.customizer-dashboard-link{color:#7c3048;font-weight:700;text-decoration:none}.customizer-banner{padding:42px 6%;color:#fff;text-align:center;background:linear-gradient(rgba(88,39,56,.78),rgba(88,39,56,.78)),url("../assets/bloombox-florals.jpg") center 44%/cover}.customizer-banner h1{margin:0 0 10px;font:36px Georgia,serif}.customizer-banner p{margin:0;color:#f8e9ec}.customizer-banner a{color:#fff;text-decoration:none}.customizer-banner strong{color:#ffe09a}.customizer-layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;max-width:1120px;margin:46px auto;padding:0 20px}.customizer-options{display:grid;gap:28px}.customizer-section{padding-bottom:28px;border-bottom:1px solid #eadcdf}.customizer-eyebrow{margin:0;color:#935466;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.customizer-section h2,.customizer-summary h2{margin:5px 0 18px;color:#3b0518;font:28px Georgia,serif}.template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.template-card,.flower-option,.extra-option{border:1px solid #eadcdf;background:#fff;color:#3b0518;cursor:pointer;font:inherit}.template-card{display:grid;gap:8px;padding:16px;text-align:left;border-radius:18px}.template-card:hover,.template-card.selected,.flower-option:hover,.flower-option.selected,.extra-option.selected{border-color:#f2c331;background:#fff9db}.template-card span:not(.template-art){color:#6b5960;font-size:13px;line-height:1.4}.template-card b{color:#7c3048}.template-art,.summary-art{display:block;overflow:hidden;border-radius:14px;background:linear-gradient(135deg,var(--template-one),var(--template-two) 52%,var(--template-three))}.template-art{height:150px;padding:0}.summary-art{height:175px;margin-bottom:20px;border-radius:18px}
+.flower-grid,.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.flower-option{display:flex;align-items:center;gap:10px;padding:13px;border-radius:16px;text-align:left}.flower-dot{width:22px;height:22px;border:2px solid rgba(59,5,24,.12);border-radius:50%;flex:none}.flower-option span:nth-child(2),.extra-option span{display:grid;gap:3px;flex:1}.flower-option small,.extra-option small{color:#935466;font-size:12px}.flower-option>b{color:#7c3048;font-size:12px}.extra-option{display:flex;align-items:flex-start;gap:10px;padding:15px;border-radius:16px}.extra-option input{accent-color:#7c3048;margin-top:3px}.customizer-summary{align-self:start;position:sticky;top:20px;padding:22px;border:1px solid #eadcdf;border-radius:22px;box-shadow:0 12px 30px rgba(59,5,24,.07)}.customizer-summary h2{margin-bottom:6px}.customizer-summary>p:not(.customizer-eyebrow):not(.cart-message){margin:0 0 20px;color:#6b5960}.summary-lines{display:grid;gap:10px;padding:16px 0;border-top:1px solid #eadcdf;border-bottom:1px solid #eadcdf}.summary-lines div,.summary-total{display:flex;justify-content:space-between;gap:12px}.summary-lines span{color:#6b5960;font-size:14px}.summary-lines strong,.summary-total strong{color:#3b0518}.summary-total{padding:18px 0;font-size:18px;font-weight:700}.add-cart-button{width:100%;padding:13px;border:0;border-radius:24px;background:#7c3048;color:#fff;cursor:pointer;font:inherit;font-weight:700}.add-cart-button:hover{background:#5b0b28}.cart-message{margin:12px 0 0;color:#34703d;font-size:13px;text-align:center}@media(max-width:800px){.customizer-layout{grid-template-columns:1fr}.customizer-summary{position:static}.template-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.customizer-header{padding:18px 20px}.template-grid,.flower-grid,.extras-grid{grid-template-columns:1fr}.customizer-layout{margin-top:30px}}
+.bouquet-stems i:nth-child(6){transform:rotate(-30deg) translateZ(4px) scale(.9)}
+.bouquet-stems i:nth-child(7){transform:rotate(31deg) translateZ(5px) scale(.9)}
+.bouquet-stems i:nth-child(8){transform:rotate(4deg) translateZ(42px) scale(.88)}.bouquet-leaves i{position:absolute;bottom:30%;left:50%;width:38px;height:17px;border-radius:100% 0 100% 0;background:linear-gradient(135deg,#91b477,#315d43);transform-origin:0 50%;box-shadow:inset -3px -3px 5px rgba(28,61,41,.25)}.bouquet-leaves i:nth-child(1){transform:rotate(205deg) translateZ(20px)}.bouquet-leaves i:nth-child(2){transform:rotate(335deg) translateZ(25px)}.bouquet-leaves i:nth-child(3){bottom:42%;transform:rotate(220deg) translateZ(12px) scale(.8)}.bouquet-leaves i:nth-child(4){bottom:43%;transform:rotate(315deg) translateZ(18px) scale(.8)}.bouquet-flowers{position:absolute;top:17%;left:50%;width:70%;height:48%;transform:translateX(-50%);transform-style:preserve-3d}.flower{position:absolute;display:grid;place-items:center;width:25%;height:auto;aspect-ratio:1;border-radius:50%;color:transparent;font-size:0;text-shadow:none;background:radial-gradient(circle at 50% 50%,#b26a45 0 10%,transparent 11%),radial-gradient(circle at 50% 10%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 88% 38%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 68% 88%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 17% 72%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 12% 30%,var(--petal-color) 0 30%,transparent 31%);filter:drop-shadow(4px 7px 5px #5b283533);transform-style:preserve-3d}.flower-one{--petal-color:var(--flower-one);top:12%;left:8%;transform:translateZ(12px) rotate(-18deg)}.flower-two{--petal-color:var(--flower-two);top:0;left:34%;transform:translateZ(35px)}.flower-three{--petal-color:var(--flower-three);top:20%;right:4%;transform:translateZ(20px) rotate(20deg)}.flower-four{--petal-color:var(--flower-two);top:35%;left:25%;transform:translateZ(42px) scale(.75)}.flower-five{--petal-color:var(--flower-one);top:32%;right:20%;transform:translateZ(30px) scale(.7)}.bouquet-wrap{position:absolute;bottom:2%;left:24%;width:52%;height:43%;background:linear-gradient(105deg,#c49a79,#f0d2b5 45%,#b98270);clip-path:polygon(13% 0,87% 0,100% 100%,0 100%);transform:translateZ(45px) rotateX(-7deg);box-shadow:inset 10px 0 12px #fff5,inset -10px 0 15px #5b283533}.bouquet-ribbon{position:absolute;bottom:25%;left:43%;width:14%;height:8%;border-radius:5px;background:#7c3048;transform:translateZ(60px) rotate(-3deg);box-shadow:0 4px 4px #5b283555}.flower-grid,.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.flower-option{display:flex;align-items:center;gap:10px;padding:13px;border-radius:16px;text-align:left}.flower-dot{width:22px;height:22px;border:2px solid rgba(59,5,24,.12);border-radius:50%;flex:none}.flower-option span:nth-child(2),.extra-option span{display:grid;gap:3px;flex:1}.flower-option small,.extra-option small{color:#935466;font-size:12px}.flower-option>b{color:#7c3048;font-size:12px}.extra-option{display:flex;align-items:flex-start;gap:10px;padding:15px;border-radius:16px}.extra-option input{accent-color:#7c3048;margin-top:3px}.customizer-summary{align-self:start;position:sticky;top:20px;padding:22px;border:1px solid #eadcdf;border-radius:22px;box-shadow:0 12px 30px rgba(59,5,24,.07)}.summary-art{height:175px;margin-bottom:20px;border-radius:18px;font-size:70px}.customizer-summary h2{margin-bottom:6px}.customizer-summary>p:not(.customizer-eyebrow):not(.cart-message){margin:0 0 20px;color:#6b5960}.summary-lines{display:grid;gap:10px;padding:16px 0;border-top:1px solid #eadcdf;border-bottom:1px solid #eadcdf}.summary-lines div,.summary-total{display:flex;justify-content:space-between;gap:12px}.summary-lines span{color:#6b5960;font-size:14px}.summary-lines strong,.summary-total strong{color:#3b0518}.summary-total{padding:18px 0;font-size:18px;font-weight:700}.add-cart-button{width:100%;padding:13px;border:0;border-radius:24px;background:#7c3048;color:#fff;cursor:pointer;font:inherit;font-weight:700}.add-cart-button:hover{background:#5b0b28}.cart-message{margin:12px 0 0;color:#34703d;font-size:13px;text-align:center}@media(max-width:800px){.customizer-layout{grid-template-columns:1fr}.customizer-summary{position:static}.template-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.customizer-header{padding:18px 20px}.template-grid,.flower-grid,.extras-grid{grid-template-columns:1fr}.customizer-layout{margin-top:30px}}
+
+/* Match the wider summary stage to the actual stem fan. */
+.summary-art .bouquet-flowers {
+  width: 46% !important;
+  left: 50% !important;
+}
+
+.summary-art .bouquet-flowers .flower-one { left: 3% !important; }
+.summary-art .bouquet-flowers .flower-two { left: 31% !important; }
+.summary-art .bouquet-flowers .flower-three { right: 3% !important; }
+.summary-art .bouquet-flowers .flower-four { left: 20% !important; }
+.summary-art .bouquet-flowers .flower-five { right: 20% !important; }
+.bouquet-image{position:absolute;inset:4% 4% 0;width:92%;height:96%;object-fit:cover;border-radius:12px;filter:drop-shadow(0 18px 12px rgba(59,5,24,.3));transform:translateZ(35px) rotateX(2deg)}.bouquet-shadow{position:absolute;bottom:10%;left:25%;width:52%;height:12%;border-radius:50%;background:rgba(59,5,24,.2);filter:blur(9px);transform:rotateX(70deg)}.bouquet-stems{position:absolute;bottom:14%;left:50%;width:35%;height:65%;transform:translateX(-50%) rotateZ(3deg);transform-origin:bottom;transform-style:preserve-3d}.bouquet-stems i{position:absolute;bottom:0;left:50%;width:7px;height:100%;border-radius:50%;background:linear-gradient(90deg,#315d43,#8cae72,#264936);transform-origin:bottom}.bouquet-stems i:nth-child(1){transform:rotate(-22deg) translateZ(12px)}.bouquet-stems i:nth-child(2){transform:rotate(-10deg) translateZ(25px)}.bouquet-stems i:nth-child(3){transform:translateZ(35px)}.bouquet-stems i:nth-child(4){transform:rotate(12deg) translateZ(20px)}.bouquet-stems i:nth-child(5){transform:rotate(24deg) translateZ(8px)}.bouquet-leaves i{position:absolute;bottom:30%;left:50%;width:38px;height:17px;border-radius:100% 0 100% 0;background:linear-gradient(135deg,#91b477,#315d43);transform-origin:0 50%;box-shadow:inset -3px -3px 5px rgba(28,61,41,.25)}.bouquet-leaves i:nth-child(1){transform:rotate(205deg) translateZ(20px)}.bouquet-leaves i:nth-child(2){transform:rotate(335deg) translateZ(25px)}.bouquet-leaves i:nth-child(3){bottom:42%;transform:rotate(220deg) translateZ(12px) scale(.8)}.bouquet-leaves i:nth-child(4){bottom:43%;transform:rotate(315deg) translateZ(18px) scale(.8)}.bouquet-flowers{position:absolute;top:17%;left:50%;width:70%;height:48%;transform:translateX(-50%);transform-style:preserve-3d}.flower{position:absolute;display:grid;place-items:center;width:25%;height:auto;aspect-ratio:1;border-radius:50%;color:transparent;font-size:0;text-shadow:none;background:radial-gradient(circle at 50% 50%,#b26a45 0 10%,transparent 11%),radial-gradient(circle at 50% 10%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 88% 38%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 68% 88%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 17% 72%,var(--petal-color) 0 30%,transparent 31%),radial-gradient(circle at 12% 30%,var(--petal-color) 0 30%,transparent 31%);filter:drop-shadow(4px 7px 5px #5b283533);transform-style:preserve-3d}.flower-one{--petal-color:var(--flower-one);top:12%;left:8%;transform:translateZ(12px) rotate(-18deg)}.flower-two{--petal-color:var(--flower-two);top:0;left:34%;transform:translateZ(35px)}.flower-three{--petal-color:var(--flower-three);top:20%;right:4%;transform:translateZ(20px) rotate(20deg)}.flower-four{--petal-color:var(--flower-two);top:35%;left:25%;transform:translateZ(42px) scale(.75)}.flower-five{--petal-color:var(--flower-one);top:32%;right:20%;transform:translateZ(30px) scale(.7)}.bouquet-wrap{position:absolute;bottom:2%;left:24%;width:52%;height:43%;background:linear-gradient(105deg,#c49a79,#f0d2b5 45%,#b98270);clip-path:polygon(13% 0,87% 0,100% 100%,0 100%);transform:translateZ(45px) rotateX(-7deg);box-shadow:inset 10px 0 12px #fff5,inset -10px 0 15px #5b283533}.bouquet-ribbon{position:absolute;bottom:25%;left:43%;width:14%;height:8%;border-radius:5px;background:#7c3048;transform:translateZ(60px) rotate(-3deg);box-shadow:0 4px 4px #5b283555}.flower-grid,.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.flower-option{display:flex;align-items:center;gap:10px;padding:13px;border-radius:16px;text-align:left}.flower-dot{width:22px;height:22px;border:2px solid rgba(59,5,24,.12);border-radius:50%;flex:none}.flower-option span:nth-child(2),.extra-option span{display:grid;gap:3px;flex:1}.flower-option small,.extra-option small{color:#935466;font-size:12px}.flower-option>b{color:#7c3048;font-size:12px}.extra-option{display:flex;align-items:flex-start;gap:10px;padding:15px;border-radius:16px}.extra-option input{accent-color:#7c3048;margin-top:3px}.customizer-summary{align-self:start;position:sticky;top:20px;padding:22px;border:1px solid #eadcdf;border-radius:22px;box-shadow:0 12px 30px rgba(59,5,24,.07)}.summary-art{height:175px;margin-bottom:20px;border-radius:18px;font-size:70px}.customizer-summary h2{margin-bottom:6px}.customizer-summary>p:not(.customizer-eyebrow):not(.cart-message){margin:0 0 20px;color:#6b5960}.summary-lines{display:grid;gap:10px;padding:16px 0;border-top:1px solid #eadcdf;border-bottom:1px solid #eadcdf}.summary-lines div,.summary-total{display:flex;justify-content:space-between;gap:12px}.summary-lines span{color:#6b5960;font-size:14px}.summary-lines strong,.summary-total strong{color:#3b0518}.summary-total{padding:18px 0;font-size:18px;font-weight:700}.add-cart-button{width:100%;padding:13px;border:0;border-radius:24px;background:#7c3048;color:#fff;cursor:pointer;font:inherit;font-weight:700}.add-cart-button:hover{background:#5b0b28}.cart-message{margin:12px 0 0;color:#34703d;font-size:13px;text-align:center}@media(max-width:800px){.customizer-layout{grid-template-columns:1fr}.customizer-summary{position:static}.template-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.customizer-header{padding:18px 20px}.template-grid,.flower-grid,.extras-grid{grid-template-columns:1fr}.customizer-layout{margin-top:30px}}
+
+/* Keep each bloom compact and clearly petal-shaped instead of rendering a filled disk. */
+.bouquet-flowers .flower {
+  width: 18%;
+  height: 18%;
+  aspect-ratio: auto;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(3px 5px 3px rgba(59, 5, 24, .2));
+}
+
+.bouquet-flowers .flower::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: var(--petal-color);
+  box-shadow:
+    0 -95% 0 var(--petal-color),
+    90% -30% 0 var(--petal-color),
+    58% 82% 0 var(--petal-color),
+    -58% 82% 0 var(--petal-color),
+    -90% -30% 0 var(--petal-color);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+/* Final flower geometry: keep every petal inside its own flower head. */
+.bouquet-visual::after {
+  display: none;
+}
+
+.bouquet-flowers {
+  top: 10%;
+  width: 72%;
+  height: 56%;
+}
+
+.bouquet-flowers .flower {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 50% 13%, var(--petal-color) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 82% 37%, var(--petal-color) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 68% 80%, var(--petal-color) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 32% 80%, var(--petal-color) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 18% 37%, var(--petal-color) 0 18%, transparent 19%);
+  filter: drop-shadow(3px 5px 3px rgba(59, 5, 24, .2));
+}
+
+.bouquet-flowers .flower::before,
+.bouquet-flowers .flower::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-flowers .flower::before {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe8a6, #b36b3d);
+  box-shadow: 0 1px 2px rgba(59, 5, 24, .25);
+}
+
+.bouquet-flowers .flower::after {
+  display: none;
+}
+
+.flower-one { top: 25%; left: 8%; transform: translateZ(12px) rotate(-12deg) scale(.82); }
+.flower-two { top: 2%; left: 34%; transform: translateZ(35px) scale(1.05); }
+.flower-three { top: 22%; right: 5%; transform: translateZ(20px) rotate(12deg) scale(.86); }
+.flower-four { top: 45%; left: 25%; transform: translateZ(42px) scale(.7); }
+.flower-five { top: 43%; right: 23%; transform: translateZ(30px) scale(.68); }
+
+/* Override the earlier experimental petal rules with contained flower heads. */
+.bouquet-flowers .flower,
+.bouquet-flowers .flower::before,
+.bouquet-flowers .flower::after {
+  box-sizing: border-box;
+}
+
+.bouquet-flowers .flower {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 23% 37% at 50% 16%, var(--petal-color) 0 99%, transparent 100%),
+    radial-gradient(ellipse 23% 37% at 82% 39%, var(--petal-color) 0 99%, transparent 100%),
+    radial-gradient(ellipse 23% 37% at 68% 79%, var(--petal-color) 0 99%, transparent 100%),
+    radial-gradient(ellipse 23% 37% at 32% 79%, var(--petal-color) 0 99%, transparent 100%),
+    radial-gradient(ellipse 23% 37% at 18% 39%, var(--petal-color) 0 99%, transparent 100%) !important;
+  box-shadow: none !important;
+  filter: drop-shadow(3px 5px 3px rgba(59, 5, 24, .22));
+}
+
+.bouquet-flowers .flower::before {
+  top: 50% !important;
+  left: 50% !important;
+  width: 19px !important;
+  height: 19px !important;
+  border: 3px solid rgba(125, 72, 42, .3);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe8a6, #b36b3d) !important;
+  box-shadow: none !important;
+  content: "" !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.bouquet-flowers .flower::after {
+  display: none !important;
+}
+
+.bouquet-flowers .flower-one { top: 28%; left: 9%; transform: translateZ(12px) rotate(-12deg) scale(.78); }
+.bouquet-flowers .flower-two { top: 0; left: 38%; transform: translateZ(35px) scale(.95); }
+.bouquet-flowers .flower-three { top: 28%; right: 7%; transform: translateZ(20px) rotate(12deg) scale(.8); }
+.bouquet-flowers .flower-four { top: 43%; left: 28%; transform: translateZ(42px) scale(.62); }
+.bouquet-flowers .flower-five { top: 42%; right: 25%; transform: translateZ(30px) scale(.6); }
+
+/* Keep every flower head connected to the stem fan above the wrap. */
+.bouquet-flowers {
+  top: 4%;
+  left: 50%;
+  width: 42%;
+  height: 62%;
+}
+
+.bouquet-stems {
+  left: 50%;
+  width: 48%;
+  height: 69%;
+}
+
+.bouquet-flowers .flower-one {
+  top: 24%;
+  left: 0;
+  transform: translateZ(12px) rotate(-12deg) scale(.78);
+}
+
+.bouquet-flowers .flower-two {
+  top: 0;
+  left: 31%;
+  transform: translateZ(35px) scale(.95);
+}
+
+.bouquet-flowers .flower-three {
+  top: 24%;
+  right: 0;
+  transform: translateZ(20px) rotate(12deg) scale(.8);
+}
+
+.bouquet-flowers .flower-four {
+  top: 43%;
+  left: 18%;
+  transform: translateZ(42px) scale(.62);
+}
+
+.bouquet-flowers .flower-five {
+  top: 42%;
+  right: 18%;
+  transform: translateZ(30px) scale(.6);
+}
+
+.bouquet-flowers .flower-six {
+  --petal-color: var(--flower-three);
+  top: 38%;
+  left: 7%;
+  transform: translateZ(24px) scale(.58);
+}
+
+.bouquet-flowers .flower-seven {
+  --petal-color: var(--flower-two);
+  top: 38%;
+  right: 7%;
+  transform: translateZ(26px) scale(.58);
+}
+
+.bouquet-flowers .flower-eight {
+  --petal-color: var(--flower-one);
+  top: 29%;
+  left: 48%;
+  transform: translateZ(48px) scale(.55);
+}
+
+.bouquet-flowers .flower {
+  display: block;
+  background: transparent !important;
+}
+
+.bouquet-flowers .flower i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 21px;
+  height: 31px;
+  border-radius: 55% 55% 48% 48%;
+  background: linear-gradient(135deg, #fff8, var(--petal-color) 38%, color-mix(in srgb, var(--petal-color) 72%, #612542));
+  box-shadow: inset -2px -3px 3px rgba(91, 40, 53, .22);
+  transform-origin: 50% 100%;
+}
+
+.bouquet-flowers .flower i:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg) translateY(-4px); }
+.bouquet-flowers .flower i:nth-child(2) { transform: translate(-50%, -100%) rotate(72deg) translateY(-4px); }
+.bouquet-flowers .flower i:nth-child(3) { transform: translate(-50%, -100%) rotate(144deg) translateY(-4px); }
+.bouquet-flowers .flower i:nth-child(4) { transform: translate(-50%, -100%) rotate(216deg) translateY(-4px); }
+.bouquet-flowers .flower i:nth-child(5) { transform: translate(-50%, -100%) rotate(288deg) translateY(-4px); }
+
+.bouquet-flowers .flower b {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(125, 72, 42, .28);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe8a6, #b36b3d);
+  box-shadow: 0 2px 3px rgba(59, 5, 24, .25);
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-flowers .flower .flower-stem {
+  position: absolute;
+  top: 51%;
+  left: 50%;
+  z-index: -1;
+  width: 5px;
+  height: 125px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #254a35, #8eb275 48%, #315d43);
+  box-shadow: 2px 0 2px rgba(31, 66, 44, .25);
+  content: "";
+  transform-origin: 50% 0;
+}
+
+.bouquet-flowers .flower-one .flower-stem { transform: translateX(-50%) rotate(-18deg); }
+.bouquet-flowers .flower-two .flower-stem { transform: translateX(-50%) rotate(-5deg); }
+.bouquet-flowers .flower-three .flower-stem { transform: translateX(-50%) rotate(18deg); }
+.bouquet-flowers .flower-four .flower-stem { height: 105px; transform: translateX(-50%) rotate(-10deg); }
+.bouquet-flowers .flower-five .flower-stem { height: 105px; transform: translateX(-50%) rotate(12deg); }
+.bouquet-flowers .flower-six .flower-stem { height: 112px; transform: translateX(-50%) rotate(-24deg); }
+.bouquet-flowers .flower-seven .flower-stem { height: 112px; transform: translateX(-50%) rotate(24deg); }
+.bouquet-flowers .flower-eight .flower-stem { height: 100px; transform: translateX(-50%) rotate(3deg); }
+
+.bouquet-flowers .flower::before,
+.bouquet-flowers .flower::after {
+  display: none !important;
+}
+
+.bouquet-flowers .flower {
+  width: 72px;
+  height: 72px;
+}
+
+.bouquet-flowers .flower::before {
+  width: 27%;
+  height: 40%;
+  border-radius: 50% 50% 45% 45%;
+  box-shadow:
+    0 -0.58em 0 var(--petal-color),
+    .55em -.18em 0 var(--petal-color),
+    .36em .5em 0 var(--petal-color),
+    -.36em .5em 0 var(--petal-color),
+    -.55em -.18em 0 var(--petal-color);
+}
+
+.bouquet-flowers .flower::after {
+  display: block;
+  width: 23%;
+  height: 23%;
+  border-radius: 50%;
+  background: #f6c96d;
+  content: "";
+}
+
+/* CSS-only bouquet model: the flowers are built from layered petals, not images. */
+.bouquet-visual {
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .7), transparent 42%),
+    linear-gradient(145deg, #fff7ef, #ead5c4);
+}
+
+.bouquet-visual::after {
+  position: absolute;
+  inset: 8% 10% 4%;
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  transform: translateZ(-8px) rotateX(62deg);
+}
+
+.bouquet-stems {
+  z-index: 1;
+  bottom: 12%;
+  height: 62%;
+}
+
+.bouquet-stems i {
+  width: 5px;
+  background: linear-gradient(90deg, #284b38, #9ab77a 45%, #315d43);
+  box-shadow: 2px 0 2px rgba(31, 66, 44, .35);
+}
+
+.bouquet-leaves {
+  position: absolute;
+  z-index: 2;
+  inset: 15% 0 0;
+  transform-style: preserve-3d;
+}
+
+.bouquet-leaves i {
+  width: 46px;
+  height: 21px;
+  background: linear-gradient(135deg, #afca8c, #315d43 70%);
+  box-shadow: inset -3px -3px 5px rgba(28, 61, 41, .25), 2px 3px 3px rgba(38, 73, 54, .2);
+}
+
+.bouquet-flowers {
+  z-index: 4;
+  top: 12%;
+  width: 76%;
+  height: 55%;
+}
+
+.bouquet-flowers .flower {
+  width: 24%;
+  height: 24%;
+  aspect-ratio: auto;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(3px 6px 3px rgba(59, 5, 24, .2));
+}
+
+.bouquet-flowers .flower::before {
+  top: 50%;
+  left: 50%;
+  width: 24%;
+  height: 42%;
+  border-radius: 55% 55% 48% 48%;
+  background: linear-gradient(135deg, #fff8, var(--petal-color) 35%, color-mix(in srgb, var(--petal-color) 78%, #6b2c49));
+  box-shadow:
+    0 -0.52em 0 var(--petal-color),
+    .5em -.16em 0 var(--petal-color),
+    .32em .43em 0 var(--petal-color),
+    -.32em .43em 0 var(--petal-color),
+    -.5em -.16em 0 var(--petal-color);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-flowers .flower::after {
+  top: 50%;
+  left: 50%;
+  width: 23%;
+  height: 23%;
+  border: 2px solid rgba(125, 72, 42, .35);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe8a6, #b36b3d);
+  box-shadow: 0 1px 2px rgba(59, 5, 24, .25);
+  content: "";
+  transform: translate(-50%, -50%) translateZ(2px);
+}
+
+.bouquet-wrap {
+  z-index: 5;
+  bottom: 0;
+  height: 43%;
+  background: linear-gradient(105deg, #b98670, #f4d8bd 45%, #bc8b78);
+  box-shadow: inset 12px 0 15px rgba(255, 255, 255, .35), inset -12px 0 15px rgba(91, 40, 53, .2), 0 7px 8px rgba(59, 5, 24, .2);
+}
+
+.bouquet-ribbon {
+  z-index: 6;
+  bottom: 24%;
+  height: 9%;
+  background: linear-gradient(#a74d6a, #68253f);
+  box-shadow: 0 4px 4px rgba(91, 40, 53, .35), inset 0 2px 2px rgba(255, 255, 255, .2);
+}
+
+.bouquet-flowers .flower::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24%;
+  height: 24%;
+  border: 2px solid rgba(125, 72, 42, .35);
+  border-radius: 50%;
+  background: #f6c96d;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.bouquet-flowers .flower {
+  font-size: 34px;
+}
+
+.summary-art .bouquet-flowers .flower {
+  font-size: 64px;
+}
+
+.bouquet-flowers .flower::before {
+  width: .34em;
+  height: .34em;
+  box-shadow:
+    0 -.52em 0 var(--petal-color),
+    .5em -.16em 0 var(--petal-color),
+    .32em .43em 0 var(--petal-color),
+    -.32em .43em 0 var(--petal-color),
+    -.5em -.16em 0 var(--petal-color);
+}
+
+/* Keep every flower visibly joined to the bundle instead of hiding the stems behind the wrap. */
+.bouquet-flowers {
+  top: 8%;
+  height: 62%;
+}
+
+.bouquet-flowers .flower .flower-stem {
+  z-index: 0;
+  height: 150px;
+  width: 6px;
+  background: linear-gradient(90deg, #234b34, #91b678 48%, #2f5b3e);
+}
+
+.bouquet-flowers .flower i,
+.bouquet-flowers .flower b {
+  z-index: 2;
+}
+
+.bouquet-wrap {
+  bottom: 1%;
+  height: 34%;
+  width: 47%;
+  left: 26.5%;
+}
+
+.bouquet-ribbon {
+  bottom: 20%;
+}
+
+/* Compact the heads into one fuller cluster. */
+.bouquet-flowers {
+  width: 36%;
+}
+
+.bouquet-flowers .flower-one {
+  left: 4%;
+}
+
+.bouquet-flowers .flower-three {
+  right: 4%;
+}
+
+.bouquet-flowers .flower-four {
+  left: 24%;
+}
+
+.bouquet-flowers .flower-five {
+  right: 24%;
+}
+
+.bouquet-flowers .flower-six {
+  left: 14%;
+}
+
+.bouquet-flowers .flower-seven {
+  right: 14%;
+}
+
+.bouquet-flowers .flower-nine,
+.bouquet-flowers .flower-ten,
+.bouquet-flowers .flower-eleven,
+.bouquet-flowers .flower-twelve {
+  width: 19%;
+  height: 19%;
+  z-index: 5;
+}
+
+.bouquet-flowers .flower-nine {
+  top: 18%;
+  left: 19%;
+  transform: translateZ(34px) rotate(-18deg) scale(.8);
+}
+
+.bouquet-flowers .flower-ten {
+  top: 18%;
+  right: 19%;
+  transform: translateZ(36px) rotate(18deg) scale(.8);
+}
+
+.bouquet-flowers .flower-eleven {
+  top: 48%;
+  left: 29%;
+  transform: translateZ(44px) rotate(-8deg) scale(.72);
+}
+
+.bouquet-flowers .flower-twelve {
+  top: 48%;
+  right: 29%;
+  transform: translateZ(44px) rotate(8deg) scale(.72);
+}

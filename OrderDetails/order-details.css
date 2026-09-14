@@ -1,0 +1,281 @@
+.order-details-page {
+  min-height: 100vh;
+  color: #2e1c23;
+  background: #fff;
+}
+.order-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 6%;
+  border-bottom: 1px solid #eadcdf;
+}
+.order-details-brand {
+  color: #3b0518;
+  font:
+    700 24px Georgia,
+    serif;
+  text-decoration: none;
+}
+.order-details-brand span {
+  color: #935466;
+  font-weight: 400;
+}
+.order-details-dashboard-link {
+  color: #7c3048;
+  font-weight: 700;
+  text-decoration: none;
+}
+.order-details-banner {
+  padding: 42px 6%;
+  color: #fff;
+  text-align: center;
+  background:
+    linear-gradient(rgba(88, 39, 56, 0.78), rgba(88, 39, 56, 0.78)),
+    url("../assets/bloombox-florals.jpg") center 44% / cover;
+}
+.order-details-banner h1 {
+  margin: 0 0 10px;
+  font:
+    36px Georgia,
+    serif;
+}
+.order-details-banner p {
+  margin: 0;
+  color: #f8e9ec;
+}
+.order-details-banner a {
+  color: #fff;
+  text-decoration: none;
+}
+.order-details-banner strong {
+  color: #ffe09a;
+}
+.order-details-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 48px;
+  max-width: 1120px;
+  margin: 46px auto;
+  padding: 0 20px;
+}
+.order-details-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.order-details-menu a {
+  padding: 11px 14px;
+  border: 1px solid #eadcdf;
+  border-radius: 18px;
+  color: #3b0518;
+  text-decoration: none;
+}
+.order-details-menu a:hover,
+.order-details-menu a.active {
+  border-color: #f2c331;
+  background: #f8cf39;
+}
+.order-details-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.order-details-eyebrow {
+  margin: 0;
+  color: #935466;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.order-details-heading h2 {
+  margin: 5px 0 8px;
+  color: #3b0518;
+  font:
+    30px Georgia,
+    serif;
+}
+.order-details-heading p:last-child {
+  margin: 0;
+  color: #6b5960;
+}
+.order-details-status {
+  padding: 7px 12px;
+  border-radius: 14px;
+  background: #f8cf39;
+  color: #3b0518;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.order-details-status.delivered {
+  background: #e4f2e1;
+  color: #34703d;
+}
+.order-details-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+}
+.details-card {
+  padding: 22px;
+  border: 1px solid #eadcdf;
+  border-radius: 18px;
+}
+.details-card h3 {
+  margin: 0 0 18px;
+  color: #3b0518;
+  font:
+    21px Georgia,
+    serif;
+}
+.detail-line,
+.detail-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0e5e8;
+}
+.detail-line span {
+  color: #6b5960;
+}
+.detail-line small {
+  color: #935466;
+}
+.detail-line strong,
+.detail-total strong {
+  color: #3b0518;
+}
+.detail-total {
+  padding-top: 18px;
+  border: 0;
+  font-weight: 700;
+}
+.details-card p {
+  margin: 7px 0;
+  color: #6b5960;
+}
+.details-subheading {
+  margin-top: 25px !important;
+}
+.back-orders-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #7c3048;
+  font-weight: 700;
+  text-decoration: none;
+}
+.missing-order p {
+  color: #6b5960;
+}
+.order-details-contact {
+  margin-top: 64px;
+}
+@media (max-width: 600px) {
+  .order-details-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .order-details-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .order-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .order-details-header {
+    padding: 18px 20px;
+  }
+  .order-details-menu {
+    grid-template-columns: 1fr;
+  }
+  .order-details-heading {
+    flex-direction: column;
+  }
+}
+.delivery-progress {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 30px 10%;
+  background: #fff;
+}
+
+.progress-step {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.progress-circle {
+  position: relative;
+  z-index: 2;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #d8d8d8;
+  border-radius: 50%;
+  background: #fff;
+
+  color: #999;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.progress-step span {
+  margin-top: 10px;
+  color: #999;
+  font-size: 13px;
+}
+
+/* Completed */
+.progress-step.completed .progress-circle {
+  border-color: #7a9e7e;
+  background: #7a9e7e;
+  color: white;
+}
+
+.progress-step.completed span {
+  color: #444;
+}
+
+/* Current */
+.progress-step.current .progress-circle {
+  border-color: #b76e79;
+  background: #b76e79;
+  color: white;
+}
+
+.progress-step.current span {
+  color: #b76e79;
+  font-weight: 600;
+}
+
+/* Line between circles */
+.progress-line {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #ddd;
+  z-index: 1;
+}
+
+.progress-line.completed {
+  background: #7a9e7e;
+}
