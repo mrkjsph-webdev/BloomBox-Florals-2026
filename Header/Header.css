@@ -1,0 +1,97 @@
+.bloombox-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 64px;
+  background: #773448 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.bloombox-header .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.bloombox-header a {
+  color: white !important;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+.bloombox-header .nav-link {
+  font-size: 12px;
+  opacity: 0.9;
+  transition: 0.2s;
+}
+
+.bloombox-header .nav-link:hover {
+  opacity: 1;
+}
+
+.nav-icon {
+  color: white !important;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.cart-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -9px;
+  right: -11px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #d62839;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-notification-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -9px;
+    right: -10px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 50%;
+    background: #d62839;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

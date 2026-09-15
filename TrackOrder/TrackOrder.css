@@ -1,0 +1,318 @@
+.track-order-page {
+    min-height: 100vh;
+    background: #fcfaf7;
+    color: #211b1d;
+    font-family: "DM Sans", sans-serif;
+}
+
+.track-order-main {
+    padding: 42px 0 70px;
+    min-height: 650px;
+}
+
+.track-order-main .container {
+    max-width: 1180px;
+}
+
+.track-page-heading {
+    margin-bottom: 35px;
+}
+
+.track-page-heading > p {
+    margin: 0 0 6px;
+    color: #773448;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.track-page-heading h1 {
+    margin: 0 0 8px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.track-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+}
+
+.track-breadcrumb a {
+    color: #773448;
+    text-decoration: none;
+}
+
+.track-breadcrumb a:hover {
+    color: #542432;
+    text-decoration: underline;
+}
+
+.track-breadcrumb span {
+    color: #777074;
+}
+
+.order-status-section,
+.track-products {
+    background: white;
+    border: 1px solid #ddd4ce;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.order-status-section {
+    margin-bottom: 28px;
+}
+
+.order-status-heading {
+    padding: 22px;
+    border-bottom: 1px solid #eee8e4;
+}
+
+.order-status-heading p,
+.track-products-header p {
+    margin: 0 0 5px;
+    color: #773448;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.order-status-heading h2,
+.track-products-header h2 {
+    margin: 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.order-id {
+    margin-top: 12px;
+    color: #777074;
+    font-size: 11px;
+}
+
+.order-id strong {
+    color: #211b1d;
+    font-weight: 600;
+}
+
+.status-timeline {
+    display: flex;
+    align-items: flex-start;
+    padding: 32px 24px 25px;
+}
+
+.status-step {
+    width: 130px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.status-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #e8e8e8;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icon span {
+    font-size: 20px;
+}
+
+.status-step.completed .status-icon {
+    background: #faa507;
+    color: white;
+}
+
+.status-step h3 {
+    margin: 0 0 7px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-step p {
+    margin: 0;
+    color: #777074;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.status-line {
+    flex: 1;
+    height: 7px;
+    margin-top: 17px;
+    background: #e5e5e5;
+    border-radius: 10px;
+}
+
+.status-line.completed {
+    background: #faa507;
+}
+
+.track-products {
+    margin-bottom: 0;
+}
+
+.track-products-header {
+    padding: 20px 22px;
+    border-bottom: 1px solid #eee8e4;
+}
+
+.track-product-list {
+    padding: 0 22px;
+}
+
+.track-product {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee8e4;
+}
+
+.track-product:last-child {
+    border-bottom: none;
+}
+
+.track-product-image {
+    width: 82px;
+    height: 82px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #f7f0e4;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.track-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.track-product-info {
+    flex: 1;
+}
+
+.track-product-info span {
+    color: #777074;
+    font-size: 10px;
+}
+
+.track-product-info h3 {
+    margin: 3px 0 5px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.track-product-info p {
+    margin: 0;
+    color: #777074;
+    font-size: 10px;
+}
+
+.track-product-price {
+    color: #211b1d;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.track-empty {
+    padding: 75px 20px;
+    background: white;
+    border: 1px solid #ddd4ce;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.track-empty > span {
+    color: #773448;
+    font-size: 42px;
+}
+
+.track-empty h2 {
+    margin: 15px 0 7px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 24px;
+}
+
+.track-empty p {
+    margin: 0 0 20px;
+    color: #777074;
+    font-size: 11px;
+}
+
+.track-shop-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 22px;
+    background: #773448;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.track-shop-btn:hover {
+    background: #542432;
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .status-timeline {
+        overflow-x: auto;
+        padding-bottom: 30px;
+    }
+
+    .status-step {
+        min-width: 115px;
+    }
+}
+
+@media (max-width: 767px) {
+    .track-order-main {
+        padding: 30px 0 50px;
+    }
+
+    .track-page-heading h1 {
+        font-size: 30px;
+    }
+
+    .order-status-heading {
+        padding: 18px;
+    }
+
+    .status-timeline {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .track-product-list {
+        padding: 0 15px;
+    }
+
+    .track-product {
+        gap: 12px;
+    }
+
+    .track-product-image {
+        width: 68px;
+        height: 68px;
+    }
+
+    .track-product-price {
+        font-size: 11px;
+    }
+}

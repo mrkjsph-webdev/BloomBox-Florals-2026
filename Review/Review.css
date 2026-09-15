@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    --burgundy: #773448;
+    --burgundy-dark: #542432;
+    --gold: #faa507;
+    --text: #211b1d;
+    --muted: #777074;
+    --border: #ddd4ce;
+}
+
+.review-page {
+    min-height: calc(100vh - 64px);
+    background: #fcfaf7;
+    padding: 40px 20px 70px;
+    font-family: "DM Sans", sans-serif;
+    color: var(--text);
+}
+
+.review-container {
+    width: min(1100px, 100%);
+    margin: auto;
+}
+
+.review-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 28px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.review-breadcrumb span {
+    cursor: pointer;
+}
+
+.review-breadcrumb strong {
+    color: var(--burgundy);
+}
+
+.review-heading {
+    margin-bottom: 25px;
+}
+
+.review-heading h1 {
+    margin: 0 0 5px;
+    font-family: "Playfair Display", serif;
+    color: var(--burgundy);
+    font-size: 32px;
+}
+
+.review-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.review-list-card {
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.review-list-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.review-product-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 28px;
+    border: none;
+    border-bottom: 1px solid #eee7e2;
+    background: white;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.review-product-row:last-child {
+    border-bottom: none;
+}
+
+.review-product-row:hover {
+    background: #fcf7f8;
+}
+
+.review-product-image {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f5f3ef;
+}
+
+.review-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.review-product-info {
+    flex: 1;
+}
+
+.review-product-info small {
+    display: block;
+    color: #999;
+    font-size: 9px;
+}
+
+.review-product-info h3 {
+    margin: 3px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.review-product-info span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.review-product-row > strong {
+    font-size: 12px;
+}
+
+.no-products {
+    padding: 50px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.review-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 250px;
+    gap: 28px;
+    align-items: start;
+}
+
+.review-form-card,
+.order-summary {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.review-form-card {
+    padding: 22px 28px 28px;
+}
+
+.back-product {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--text);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.selected-product {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #eee7e2;
+}
+
+.selected-product-image {
+    width: 58px;
+    height: 58px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f5f3ef;
+}
+
+.selected-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.selected-product-info {
+    flex: 1;
+}
+
+.selected-product-info small {
+    color: #999;
+    font-size: 9px;
+}
+
+.selected-product-info h2 {
+    margin: 3px 0 0;
+    font-size: 14px;
+}
+
+.selected-product > strong {
+    font-size: 12px;
+}
+
+.review-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 210px;
+    gap: 30px;
+    padding-top: 25px;
+}
+
+.upload-section h3 {
+    margin: 0 0 12px;
+    font-size: 13px;
+}
+
+.upload-box {
+    min-height: 125px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px dashed #c9c1bc;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-box .material-symbols-outlined {
+    font-size: 24px;
+}
+
+.upload-box strong {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.upload-box small {
+    color: #aaa;
+    font-size: 9px;
+}
+
+.upload-box input {
+    display: none;
+}
+
+.browse-button {
+    margin-top: 4px;
+    padding: 5px 13px;
+    border: 1px solid #d5cec8;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.selected-file {
+    margin: 8px 0 0;
+    color: var(--burgundy);
+    font-size: 10px;
+}
+
+.ratings {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rating-item > span {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 9px;
+}
+
+.stars {
+    display: flex;
+    gap: 3px;
+}
+
+.star {
+    padding: 0;
+    border: none;
+    background: none;
+    color: transparent;
+    -webkit-text-stroke: 1px #8c969e;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.star.active {
+    color: var(--gold);
+    -webkit-text-stroke: 0;
+}
+
+.feedback {
+    margin-top: 26px;
+}
+
+.feedback label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+}
+
+.feedback textarea {
+    width: 100%;
+    min-height: 80px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #e0d9d4;
+    border-radius: 5px;
+    outline: none;
+    resize: vertical;
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+}
+
+.feedback textarea:focus {
+    border-color: var(--burgundy);
+}
+
+.submit-review {
+    margin-top: 12px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: var(--burgundy);
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.submit-review:hover {
+    background: var(--burgundy-dark);
+}
+
+.order-summary {
+    padding: 17px;
+}
+
+.order-summary h3 {
+    margin: 0 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee7e2;
+    font-size: 12px;
+}
+
+.order-summary div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 9px;
+}
+
+.order-summary span {
+    color: var(--muted);
+}
+
+.order-summary strong {
+    text-align: right;
+    font-weight: 500;
+}
+
+.review-thanks {
+    min-height: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.success-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: #0aad42;
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.review-thanks h1 {
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+}
+
+.review-thanks p {
+    margin: 12px 0 30px;
+    color: #888;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.review-thanks button,
+.review-empty button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: var(--burgundy);
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .review-layout,
+    .review-main {
+        grid-template-columns: 1fr;
+    }
+
+    .order-summary {
+        order: -1;
+    }
+}
+
+@media (max-width: 500px) {
+    .review-page {
+        padding: 25px 12px 50px;
+    }
+
+    .review-form-card {
+        padding: 18px;
+    }
+
+    .review-product-row {
+        padding: 15px;
+    }
+
+    .review-heading h1 {
+        font-size: 27px;
+    }
+
+    .review-thanks-buttons {
+        flex-direction: column;
+    }
+
+    .review-thanks-buttons button {
+        width: 180px;
+    }
+}
+
+.review-thanks-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.review-thanks-buttons button {
+    width: auto;
+    min-width: 135px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    background: var(--burgundy);
+    color: white;
+    font-size: 10px;
+    font-family: "DM Sans", sans-serif;
+    cursor: pointer;
+}
+
+.review-thanks-buttons button:hover {
+    background: var(--burgundy-dark);
+}
