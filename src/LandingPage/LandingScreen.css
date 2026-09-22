@@ -1,0 +1,883 @@
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #3b0518;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+}
+
+.hero-section::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.68) 100%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 56px);
+  min-height: 560px;
+  object-fit: cover;
+  opacity: 0.84;
+}
+
+.hero-text {
+  left: 12%;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  width: 400px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-family: Georgia, serif;
+  font-weight: 700;
+}
+
+.hero-text p {
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.hero-sunflower {
+  position: absolute;
+  right: 5%;
+  bottom: -2px;
+  z-index: 2;
+  width: min(35vw, 460px);
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.25));
+}
+
+
+/* =====================================================
+   CATEGORIES SECTION
+===================================================== */
+
+.categories-section {
+  position: relative;
+
+  width: 100%;
+
+  padding: 35px 5.5% 40px;
+
+  background-color: #935466;
+
+  color: white;
+
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+}
+
+
+/* ---------------- HEADER ---------------- */
+
+.categories-header {
+  text-align: center;
+
+  margin-bottom: 32px;
+}
+
+.categories-header p {
+  margin: 0 0 6px;
+
+  font-family: Georgia, serif;
+
+  font-size: 23px;
+
+  font-weight: 700;
+}
+
+.categories-header h3 {
+  margin: 0;
+
+  color: #ffe09a;
+
+  font-family: Georgia, serif;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  text-decoration-thickness: 2px;
+
+  text-underline-offset: 7px;
+}
+
+
+/* =====================================================
+   CATEGORY LAYOUT
+===================================================== */
+
+.categories-layout {
+  display: flex;
+
+  width: 100%;
+
+  gap: 12px;
+
+  min-height: 558px;
+}
+
+
+/* ---------------- TWO CARD COLUMNS ---------------- */
+
+.category-column {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+
+/* =====================================================
+   CATEGORY CARD
+===================================================== */
+
+.category-card {
+  position: relative;
+
+  flex: 1;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  border-radius: 0 0 17px 17px;
+
+  cursor: pointer;
+}
+
+
+/* IMAGE */
+
+.category-card img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+
+/* Zoom image on hover */
+
+.category-card:hover img {
+  transform: scale(1.06);
+}
+
+
+/* =====================================================
+   IMAGE OVERLAY
+===================================================== */
+
+.category-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.05) 70%
+  );
+
+  z-index: 1;
+}
+
+
+/* =====================================================
+   CATEGORY TITLE
+===================================================== */
+
+.category-card h3 {
+  position: absolute;
+
+  left: 25px;
+
+  bottom: 20px;
+
+  z-index: 2;
+
+  margin: 0;
+
+  color: white;
+
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+
+  font-weight: 500;
+
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =====================================================
+   CENTER FEATURED CARD
+===================================================== */
+
+.category-featured {
+  flex: 1;
+
+  border-radius: 17px;
+}
+
+.category-featured h3 {
+  font-size: 26px;
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .hero-image {
+    height: 550px;
+  }
+
+  .hero-text {
+    left: 8%;
+    width: 350px;
+  }
+
+  .hero-sunflower {
+    right: 1%;
+    width: min(35vw, 300px);
+  }
+
+  .hero-text h1 {
+    font-size: 40px;
+  }
+
+  .categories-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .categories-header h3 {
+    font-size: 27px;
+  }
+
+  .categories-layout {
+    height: 500px;
+    gap: 10px;
+  }
+
+  .category-card h3 {
+    font-size: 20px;
+  }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .hero-image {
+    height: 550px;
+  }
+
+  .hero-text {
+    left: 8%;
+    width: 350px;
+  }
+
+  .hero-text h1 {
+    font-size: 40px;
+  }
+
+  .categories-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .categories-header {
+    margin-bottom: 28px;
+  }
+
+  .categories-header p {
+    font-size: 21px;
+  }
+
+  .categories-header h3 {
+    font-size: 27px;
+  }
+
+  /* Keep 3 columns on tablet */
+
+  .categories-layout {
+    display: flex;
+    flex-direction: row;
+
+    height: 500px;
+
+    gap: 10px;
+  }
+
+  .category-column {
+    flex: 1;
+    height: 500px;
+  }
+
+  .category-featured {
+    flex: 1;
+    height: 500px;
+  }
+
+  .category-card h3 {
+    font-size: 20px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .hero-image {
+    height: 500px;
+  }
+
+  .hero-text {
+    left: 7%;
+    width: 80%;
+  }
+
+  .hero-sunflower {
+    right: -5%;
+    bottom: -2px;
+    width: min(42vw, 220px);
+  }
+
+  .hero-text h1 {
+    font-size: 35px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+  }
+
+
+  /* ================================
+     CATEGORIES
+  ================================ */
+
+  .categories-section {
+    padding: 30px 20px 40px;
+  }
+
+  .categories-header {
+    margin-bottom: 25px;
+  }
+
+  .categories-header p {
+    font-size: 20px;
+  }
+
+  .categories-header h3 {
+    font-size: 25px;
+    line-height: 1.3;
+  }
+
+
+  /* Stack all category groups */
+
+  .categories-layout {
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+
+    gap: 12px;
+  }
+
+
+  /* Two-card columns */
+
+  .category-column {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    height: auto;
+
+    gap: 12px;
+  }
+
+
+  /* Normal cards */
+
+  .category-card {
+    width: 100%;
+
+    height: 250px;
+
+    flex: none;
+
+    border-radius: 0 0 17px 17px;
+  }
+
+
+  /* Grand Celebrations */
+
+  .category-featured {
+    width: 100%;
+
+    height: 300px;
+
+    flex: none;
+
+    border-radius: 17px;
+  }
+
+
+  .category-card h3 {
+    left: 18px;
+    bottom: 17px;
+
+    font-size: 21px;
+  }
+
+}
+
+.landing-screen .navbar-color {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: #5d2f3c;
+}
+
+.landing-screen {
+  min-height: 100vh;
+  padding-top: 56px;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+.landing-screen > .hero-section,
+.landing-screen > .categories-section,
+.landing-screen > .featured-flowers,
+.landing-screen > .about-section,
+.landing-screen > #faqs,
+.landing-screen > #contact {
+  display: block;
+  margin: 0;
+}
+
+.landing-screen > #contact {
+  background-color: #000;
+}
+
+.landing-screen > #contact > .contact-section {
+  width: 100%;
+  min-height: 100%;
+  background-color: #000;
+}
+
+.dark-mode .landing-screen > #contact,
+.dark-mode .landing-screen > #contact > .contact-section {
+  background-color: #000;
+}
+
+@media (min-width: 769px) {
+  .landing-screen > .hero-section,
+  .landing-screen > .categories-section,
+  .landing-screen > .featured-flowers,
+  .landing-screen > .about-section,
+  .landing-screen > #faqs,
+  .landing-screen > #contact {
+    min-height: calc(100vh - 56px);
+  }
+
+  .landing-screen > .categories-section,
+  .landing-screen > .featured-flowers,
+  .landing-screen > .about-section,
+  .landing-screen > #faqs,
+  .landing-screen > #contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .landing-screen > .categories-section {
+    justify-content: flex-start;
+    padding-top: 64px;
+  }
+
+  .landing-screen > #faqs {
+    background-color: #64293a;
+  }
+
+  .landing-screen > #faqs > .faq-section {
+    flex: 1 1 auto;
+  }
+}
+
+.landing-screen > .about-section,
+.landing-screen > .featured-flowers,
+.landing-screen > #faqs,
+.landing-screen > #contact {
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+}
+
+.landing-screen > #faqs {
+  background-color: #64293a;
+}
+
+.landing-screen > #faqs > .faq-section {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 100%;
+  background-color: #64293a;
+}
+
+.dark-mode .landing-screen > #faqs {
+  background-color: #4b2030;
+}
+
+.dark-mode .landing-screen > #faqs > .faq-section {
+  background-color: #4b2030;
+}
+
+.theme-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.landing-screen .gold-button {
+  border: 1px solid #a9823d !important;
+  background-color: #8f6b2f !important;
+  color: #fff8e7 !important;
+  font-weight: 700;
+}
+
+.landing-screen .gold-button:hover,
+.landing-screen .gold-button:focus-visible {
+  border-color: #c09a54 !important;
+  background-color: #a9823d !important;
+  color: #fff8e7 !important;
+}
+
+@media (min-width: 769px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
+
+.navbar-color .navbar-brand,
+.navbar-color .nav-link,
+.navbar-color .nav-link:visited {
+  color: white;
+}
+
+.navbar-color .navbar-brand {
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.navbar-color .nav-link {
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.navbar-color .navbar-brand:hover,
+.navbar-color .navbar-brand:focus-visible,
+.navbar-color .navbar-brand:active {
+  color: #ffe09a !important;
+}
+
+.navbar-color .navbar-brand:link,
+.navbar-color .navbar-brand:visited {
+  color: #fff !important;
+}
+
+.navbar-color .nav-link:hover,
+.navbar-color .nav-link:focus-visible,
+.navbar-color .nav-link.active {
+  color: #ffe09a;
+}
+
+.navbar-color .navbar-toggler {
+  border-color: white;
+}
+
+.navbar-color .navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-color .navbar-collapse {
+  background-color: #5d2f3c;
+}
+
+.navbar-color .btn-outline-danger {
+  color: white;
+  border-color: white;
+}
+.navbar-color .btn-outline-danger:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+.hero-image {
+  opacity: 0.84;
+}
+
+.dark-mode .hero-image {
+  opacity: 1;
+}
+
+.dark-mode .hero-section::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.38) 48%,
+    rgba(0, 0, 0, 0.74) 100%
+  );
+}
+
+@media (max-width: 991px) {
+  .navbar-color .navbar-collapse {
+    flex-basis: 100%;
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  .navbar-color .navbar-nav {
+    width: 100%;
+    gap: 0.15rem;
+  }
+
+  .navbar-color .nav-link {
+    padding: 0.55rem 0.75rem;
+    border-radius: 0.35rem;
+    line-height: 1.25;
+  }
+
+  .navbar-color .nav-link:hover,
+  .navbar-color .nav-link:focus-visible {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .theme-toggle {
+    margin: 0.5rem 0;
+  }
+
+  .navbar-actions {
+    width: 100%;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar-actions .btn,
+  .navbar-actions .theme-toggle {
+    flex: 0 0 auto;
+  }
+}
+
+.dark-mode .navbar-color .navbar-collapse {
+  background-color: #24151c;
+}
+
+@media (max-width: 576px) {
+  .landing-screen {
+    padding-top: 56px;
+  }
+}
+
+.dark-mode .navbar-color .nav-link:hover,
+.dark-mode .navbar-color .nav-link:focus-visible,
+.dark-mode .navbar-color .nav-link.active {
+  color: #ffd6e2;
+}
+
+@media (max-width: 576px) {
+  .navbar-color .container-fluid {
+    align-items: center;
+  }
+
+  .navbar-color .navbar-brand {
+    font-size: 1.35rem;
+  }
+
+  .navbar-color .navbar-toggler {
+    padding: 0.35rem 0.55rem;
+  }
+
+  .navbar-color .navbar-collapse {
+    max-height: calc(100vh - 5.5rem);
+    overflow-y: auto;
+  }
+
+  .navbar-actions {
+    gap: 0.5rem !important;
+  }
+}
+
+
+/* =====================================================
+   DARK MODE FIX
+   Only overrides colors when .dark-mode is active.
+===================================================== */
+
+.landing-screen.dark-mode {
+  background-color: #181114;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .navbar-color {
+  background-color: #24151c;
+}
+
+.landing-screen.dark-mode .navbar-color .navbar-collapse {
+  background-color: #24151c;
+}
+
+.landing-screen.dark-mode .hero-section {
+  background-color: #181114;
+}
+
+.landing-screen.dark-mode .categories-section {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .categories-header p,
+.landing-screen.dark-mode .categories-header h3 {
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .featured-flowers {
+  background-color: #181114;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .featured-flowers *,
+.landing-screen.dark-mode .about-section *,
+.landing-screen.dark-mode > #faqs *,
+.landing-screen.dark-mode > #contact * {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.landing-screen.dark-mode .about-section {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode > #faqs,
+.landing-screen.dark-mode > #faqs > .faq-section {
+  background-color: #4b2030;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode > #contact,
+.landing-screen.dark-mode > #contact > .contact-section {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Featured flower cards and their content */
+.landing-screen.dark-mode .featured-flowers .card,
+.landing-screen.dark-mode .featured-flowers .flower-card {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+/* Search/filter controls */
+.landing-screen.dark-mode .featured-flowers input,
+.landing-screen.dark-mode .featured-flowers select {
+  background-color: #24151c;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.landing-screen.dark-mode .featured-flowers input::placeholder {
+  color: #cccccc;
+}
+
+.landing-screen.dark-mode .featured-flowers option {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+/* Common text elements inside the dark-mode sections */
+.landing-screen.dark-mode .featured-flowers h1,
+.landing-screen.dark-mode .featured-flowers h2,
+.landing-screen.dark-mode .featured-flowers h3,
+.landing-screen.dark-mode .featured-flowers h4,
+.landing-screen.dark-mode .featured-flowers h5,
+.landing-screen.dark-mode .featured-flowers h6,
+.landing-screen.dark-mode .featured-flowers p,
+.landing-screen.dark-mode .about-section h1,
+.landing-screen.dark-mode .about-section h2,
+.landing-screen.dark-mode .about-section h3,
+.landing-screen.dark-mode .about-section h4,
+.landing-screen.dark-mode .about-section h5,
+.landing-screen.dark-mode .about-section h6,
+.landing-screen.dark-mode .about-section p {
+  color: #ffffff;
+}
+
+/* Fix the dark-mode FAQ selectors */
+.landing-screen.dark-mode > #faqs {
+  background-color: #4b2030;
+}
+
+.landing-screen.dark-mode > #faqs > .faq-section {
+  background-color: #4b2030;
+}

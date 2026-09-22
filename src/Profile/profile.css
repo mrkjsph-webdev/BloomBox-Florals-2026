@@ -1,0 +1,242 @@
+.profile-page {
+  min-height: 100vh;
+  color: #2e1c23;
+  background: #fff;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6%;
+  border-bottom: 1px solid #eadcdf;
+}
+
+.profile-brand {
+  color: #3b0518;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.profile-brand span {
+  color: #935466;
+  font-weight: 400;
+}
+.profile-dashboard-link {
+  color: #7c3048;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.profile-banner {
+  padding: 42px 6%;
+  color: #fff;
+  text-align: center;
+  background:
+    linear-gradient(rgba(88, 39, 56, 0.78), rgba(88, 39, 56, 0.78)),
+    url("../assets/bloombox-florals.jpg") center 44% / cover;
+}
+
+.profile-banner h1 {
+  margin: 0 0 10px;
+  font-family: Georgia, serif;
+  font-size: 36px;
+}
+.profile-banner p {
+  margin: 0;
+  color: #f8e9ec;
+}
+.profile-banner a {
+  color: #fff;
+  text-decoration: none;
+}
+.profile-banner strong {
+  color: #ffe09a;
+}
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 48px;
+  max-width: 1120px;
+  margin: 46px auto;
+  padding: 0 20px;
+}
+
+.account-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.account-menu a,
+.account-menu .logout-button {
+  padding: 11px 14px;
+  border: 1px solid #eadcdf;
+  border-radius: 18px;
+  background: #fff;
+  color: #3b0518;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.account-menu a:hover,
+.account-menu a.active,
+.account-menu .logout-button:hover {
+  border-color: #f2c331;
+  background: #f8cf39;
+}
+
+.profile-form-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.profile-avatar {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  place-items: center;
+  border: 5px solid #e7e0da;
+  border-radius: 50%;
+  background: #f2dce2;
+  color: #7c3048;
+  font-weight: 700;
+}
+.profile-eyebrow {
+  margin: 0;
+  color: #935466;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.profile-form-heading h2 {
+  margin: 5px 0 0;
+  color: #3b0518;
+  font-family: Georgia, serif;
+  font-size: 28px;
+}
+.profile-form {
+  display: grid;
+  gap: 16px;
+}
+.profile-form label {
+  display: grid;
+  gap: 7px;
+  color: #7c3048;
+  font-weight: 700;
+}
+.profile-form input,
+.profile-form select {
+  width: 100%;
+  padding: 11px 13px;
+  border: 2px solid #eadcdf;
+  border-radius: 18px;
+  background: #fff;
+  color: #6b5960;
+  font: inherit;
+}
+.profile-form input:focus,
+.profile-form select:focus {
+  border-color: #c99cab;
+  outline: 3px solid rgba(147, 84, 102, 0.14);
+}
+.profile-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.profile-submit {
+  justify-self: start;
+  margin-top: 16px;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 24px;
+  background: #7c3048;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+.profile-submit:hover {
+  background: #5b0b28;
+}
+.profile-contact {
+  margin-top: 64px;
+}
+
+@media (max-width: 600px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .account-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .profile-header {
+    padding: 18px 20px;
+  }
+  .profile-layout {
+    margin-top: 30px;
+  }
+  .account-menu,
+  .profile-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.profile-success-modal {
+  width: 90%;
+  max-width: 420px;
+  padding: 32px;
+  border-radius: 18px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.profile-success-modal h2 {
+  margin: 0 0 10px;
+  color: #3b0518;
+  font-family: Georgia, serif;
+  font-size: 28px;
+}
+
+.profile-success-modal p {
+  margin: 0 0 24px;
+  color: #6b5960;
+}
+
+.profile-success-modal button {
+  padding: 10px 28px;
+  border: 0;
+  border-radius: 24px;
+  background: #7c3048;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.profile-success-modal button:hover {
+  background: #5b0b28;
+}

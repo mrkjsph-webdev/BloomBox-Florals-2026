@@ -1,0 +1,187 @@
+.orders-page {
+  min-height: 100vh;
+  color: #2e1c23;
+  background: #fff;
+}
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 6%;
+  border-bottom: 1px solid #eadcdf;
+}
+.orders-brand {
+  color: #3b0518;
+  font:
+    700 24px Georgia,
+    serif;
+  text-decoration: none;
+}
+.orders-brand span {
+  color: #935466;
+  font-weight: 400;
+}
+.orders-dashboard-link {
+  color: #7c3048;
+  font-weight: 700;
+  text-decoration: none;
+}
+.orders-banner {
+  padding: 42px 6%;
+  color: #fff;
+  text-align: center;
+  background:
+    linear-gradient(rgba(88, 39, 56, 0.78), rgba(88, 39, 56, 0.78)),
+    url("../assets/bloombox-florals.jpg") center 44% / cover;
+}
+.orders-banner h1 {
+  margin: 0 0 10px;
+  font:
+    36px Georgia,
+    serif;
+}
+.orders-banner p {
+  margin: 0;
+  color: #f8e9ec;
+}
+.orders-banner a {
+  color: #fff;
+  text-decoration: none;
+}
+.orders-banner strong {
+  color: #ffe09a;
+}
+.orders-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 48px;
+  max-width: 1120px;
+  margin: 46px auto;
+  padding: 0 20px;
+}
+.orders-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.orders-menu a,
+.orders-menu .logout-button {
+  padding: 11px 14px;
+  border: 1px solid #eadcdf;
+  border-radius: 18px;
+  background: #fff;
+  color: #3b0518;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.orders-menu a:hover,
+.orders-menu a.active,
+.orders-menu .logout-button:hover {
+  border-color: #f2c331;
+  background: #f8cf39;
+}
+.orders-eyebrow {
+  margin: 0;
+  color: #935466;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.orders-panel h2 {
+  margin: 5px 0 8px;
+  color: #3b0518;
+  font:
+    30px Georgia,
+    serif;
+}
+.orders-intro {
+  margin: 0 0 25px;
+  color: #6b5960;
+}
+.orders-list {
+  display: grid;
+  gap: 14px;
+}
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #eadcdf;
+  border-radius: 18px;
+}
+.order-number,
+.order-card p {
+  color: #935466;
+  font-size: 13px;
+}
+.order-card h3 {
+  margin: 7px 0 0;
+  color: #3b0518;
+  font:
+    21px Georgia,
+    serif;
+}
+.order-card p {
+  margin: 8px 0 0;
+}
+.order-meta {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 145px;
+}
+.order-status {
+  padding: 5px 10px;
+  border-radius: 12px;
+  background: #f8cf39;
+  color: #3b0518;
+  font-size: 12px;
+  font-weight: 700;
+}
+.order-status.delivered {
+  background: #e4f2e1;
+  color: #34703d;
+}
+.order-meta strong {
+  color: #3b0518;
+}
+.order-meta button {
+  border: 0;
+  background: transparent;
+  color: #7c3048;
+  cursor: pointer;
+  font-weight: 700;
+}
+.orders-contact {
+  margin-top: 64px;
+}
+@media (max-width: 600px) {
+  .orders-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .orders-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .orders-header {
+    padding: 18px 20px;
+  }
+  .order-card {
+    flex-direction: column;
+  }
+  .order-meta {
+    align-items: flex-start;
+  }
+  .orders-menu {
+    grid-template-columns: 1fr;
+  }
+}
