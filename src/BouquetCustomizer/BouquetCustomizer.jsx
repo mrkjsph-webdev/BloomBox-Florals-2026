@@ -37,6 +37,19 @@ const flowerOptions = [
   { id: 8, name: "Peony", price: 90, color: "#e7a5b5" },
 ];
 
+const paperSizes = [
+  { name: "Small", price: 0 },
+  { name: "Medium", price: 30 },
+  { name: "Large", price: 60 },
+];
+
+const bouquetWrappers = [
+  { name: "Kraft Paper", price: 20 },
+  { name: "Tissue Paper", price: 30 },
+  { name: "Wrapping Paper", price: 40 },
+  { name: "Cellophane", price: 25 },
+];
+
 function BouquetCustomizer() {
   const navigate = useNavigate();
 
@@ -47,6 +60,21 @@ function BouquetCustomizer() {
   const [added, setAdded] = useState(false);
   const [bouquetItems, setBouquetItems] = useState([]);
 
+  // Paper customization
+  const [selectedPaperSize, setSelectedPaperSize] = useState("Small");
+  const [selectedPaper, setSelectedPaper] = useState("Kraft Paper");
+
+  // AI chatbot
+  const [showChat, setShowChat] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+
+  const [messages, setMessages] = useState([
+    {
+      sender: "bot",
+      text: "Hello! I can help you choose the right paper size, bouquet paper, flowers, or care options.",
+    },
+  ]);
+
   useEffect(() => {
     const client = JSON.parse(localStorage.getItem("client"));
 
@@ -55,18 +83,14 @@ function BouquetCustomizer() {
       return;
     }
 
-    const storedFlower = JSON.parse(
-      sessionStorage.getItem(`bouquetFlower_${client.client_id}`),
+    const storedFlowers = JSON.parse(
+      sessionStorage.getItem(`bouquetFlowers_${client.client_id}`),
     );
 
-    if (storedFlower) {
-      setBouquetItems([storedFlower]);
+    if (Array.isArray(storedFlowers)) {
+      setBouquetItems(storedFlowers);
 
-      setSelectedFlowers((current) =>
-        current.includes(Number(storedFlower.id))
-          ? current
-          : [...current, Number(storedFlower.id)],
-      );
+      setSelectedFlowers(storedFlowers.map((flower) => Number(flower.id)));
     }
   }, []);
 
@@ -75,18 +99,80 @@ function BouquetCustomizer() {
     navigate("/home");
   }
 
+  function handleChat() {
+    if (!chatInput.trim()) return;
+
+    const userMessage = chatInput.trim();
+
+    setMessages((prev) => [...prev, { sender: "user", text: userMessage }]);
+
+    let response =
+      "I can help you customize your bouquet. You can ask me about paper size, bouquet paper, flowers, or bouquet care.";
+
+    const message = userMessage.toLowerCase();
+
+    if (message.includes("size")) {
+      response =
+        "For a small bouquet or a simple gift, I recommend Small. Medium is suitable for a fuller arrangement, while Large works well for bigger bouquets or special occasions.";
+    } else if (message.includes("kraft")) {
+      response =
+        "Kraft Paper gives your bouquet a natural, simple, and elegant look.";
+    } else if (message.includes("tissue")) {
+      response =
+        "Tissue Paper gives your bouquet a soft and delicate appearance.";
+    } else if (message.includes("wrapping")) {
+      response =
+        "Wrapping Paper is a good choice if you want a more decorative and colorful bouquet presentation.";
+    } else if (message.includes("cellophane")) {
+      response =
+        "Cellophane gives your bouquet a clean and transparent finish while keeping the flowers visible.";
+    } else if (message.includes("paper")) {
+      response =
+        "You can choose between Kraft Paper, Tissue Paper, Wrapping Paper, and Cellophane depending on the look you want.";
+    } else if (message.includes("flower")) {
+      response =
+        "Roses and peonies create a romantic look, sunflowers and tulips give a bright feel, while daisies and carnations create a cheerful arrangement.";
+    } else if (message.includes("care")) {
+      response =
+        "Keep your bouquet away from direct heat and sunlight, and make sure fresh flowers have enough water.";
+    }
+
+    setChatInput("");
+
+    setTimeout(() => {
+      setMessages((prev) => [...prev, { sender: "bot", text: response }]);
+    }, 500);
+  }
+
   const template = templates.find((item) => item.id === templateId);
+
+  const selectedSize = paperSizes.find(
+    (item) => item.name === selectedPaperSize,
+  );
+
+  const selectedWrapper = bouquetWrappers.find(
+    (item) => item.name === selectedPaper,
+  );
 
   const total = useMemo(
     () =>
       template.price +
+      (selectedSize?.price || 0) +
+      (selectedWrapper?.price || 0) +
       bouquetItems.reduce((sum, item) => sum + item.price * item.quantity, 0) +
       (greetingCard ? 50 : 0) +
       (plushToy ? 120 : 0),
-    [template, bouquetItems, greetingCard, plushToy],
+    [
+      template,
+      selectedSize,
+      selectedWrapper,
+      bouquetItems,
+      greetingCard,
+      plushToy,
+    ],
   );
 
-  function toggleFlower(item) {
+  function updateFlowerQuantity(item, change) {
     const client = JSON.parse(localStorage.getItem("client"));
 
     if (!client) {
@@ -94,37 +180,129 @@ function BouquetCustomizer() {
       return;
     }
 
-    const storageKey = `bouquetFlower_${client.client_id}`;
+    const storageKey = `bouquetFlowers_${client.client_id}`;
 
-    const storedFlower = JSON.parse(sessionStorage.getItem(storageKey));
+    setBouquetItems((currentItems) => {
+      const existingFlower = currentItems.find(
+        (flower) => Number(flower.id) === Number(item.id),
+      );
 
-    const isAdded = storedFlower && Number(storedFlower.id) === Number(item.id);
+      let updatedItems;
 
-    if (isAdded) {
-      sessionStorage.removeItem(storageKey);
-      setBouquetItems([]);
-      setSelectedFlowers([]);
-      return;
-    }
+      if (existingFlower) {
+        const newQuantity = existingFlower.quantity + change;
 
-    const flowerToAdd = {
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      color: item.color,
-      quantity: 1,
-    };
+        if (newQuantity <= 0) {
+          updatedItems = currentItems.filter(
+            (flower) => Number(flower.id) !== Number(item.id),
+          );
+        } else {
+          updatedItems = currentItems.map((flower) =>
+            Number(flower.id) === Number(item.id)
+              ? {
+                  ...flower,
+                  quantity: newQuantity,
+                }
+              : flower,
+          );
+        }
+      } else if (change > 0) {
+        updatedItems = [
+          ...currentItems,
+          {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            color: item.color,
+            quantity: 1,
+          },
+        ];
+      } else {
+        updatedItems = currentItems;
+      }
 
-    sessionStorage.setItem(storageKey, JSON.stringify(flowerToAdd));
+      sessionStorage.setItem(storageKey, JSON.stringify(updatedItems));
 
-    setBouquetItems([flowerToAdd]);
-    setSelectedFlowers([item.id]);
+      setSelectedFlowers(updatedItems.map((flower) => Number(flower.id)));
+
+      return updatedItems;
+    });
+  }
+
+  function getFlowerQuantity(flowerId) {
+    const flower = bouquetItems.find(
+      (item) => Number(item.id) === Number(flowerId),
+    );
+
+    return flower ? flower.quantity : 0;
   }
 
   return (
     <main className="customizer-page">
+      {/* LEFT SIDE AI MINI CHAT */}
+      <section className={`ai-mini-chat ${showChat ? "open" : ""}`}>
+        {!showChat ? (
+          <button
+            type="button"
+            className="ai-mini-button"
+            onClick={() => setShowChat(true)}
+          >
+            <span className="ai-mini-icon">✨</span>
+            <span>Ask AI</span>
+          </button>
+        ) : (
+          <div className="ai-mini-panel">
+            <div className="ai-mini-header">
+              <div>
+                <strong>BloomBox AI</strong>
+                <small>Here to help you customize</small>
+              </div>
+
+              <button
+                type="button"
+                className="ai-close-button"
+                onClick={() => setShowChat(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="ai-mini-messages">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`chat-bubble ${
+                    message.sender === "user" ? "user-bubble" : "bot-bubble"
+                  }`}
+                >
+                  {message.text}
+                </div>
+              ))}
+            </div>
+
+            <div className="ai-mini-input">
+              <input
+                type="text"
+                placeholder="Ask about your bouquet..."
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleChat();
+                  }
+                }}
+              />
+
+              <button type="button" onClick={handleChat}>
+                →
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
+
       <header className="customizer-header">
-        <Link to="/" className="customizer-brand">
+        <Link to="/home" className="customizer-brand">
           BloomBox <span>Florals</span>
         </Link>
 
@@ -147,6 +325,7 @@ function BouquetCustomizer() {
 
       <section className="customizer-layout">
         <div className="customizer-options">
+          {/* TEMPLATE */}
           <section className="customizer-section">
             <p className="customizer-eyebrow">Step 1</p>
 
@@ -182,64 +361,113 @@ function BouquetCustomizer() {
             </div>
           </section>
 
+          {/* PAPER SIZE AND BOUQUET WRAPPER */}
           <section className="customizer-section">
             <p className="customizer-eyebrow">Step 2</p>
+
+            <h2>Choose your bouquet paper</h2>
+
+            <div className="paper-customizer-grid">
+              <div className="paper-choice-group">
+                <label className="customizer-label">Paper Size</label>
+
+                <div className="paper-options">
+                  {paperSizes.map((size) => (
+                    <button
+                      key={size.name}
+                      type="button"
+                      className={`paper-option ${
+                        selectedPaperSize === size.name ? "selected" : ""
+                      }`}
+                      onClick={() => setSelectedPaperSize(size.name)}
+                    >
+                      <span>{size.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="paper-choice-group">
+                <label className="customizer-label">Bouquet Wrapper</label>
+
+                <div className="paper-options">
+                  {bouquetWrappers.map((wrapper) => (
+                    <button
+                      key={wrapper.name}
+                      type="button"
+                      className={`paper-option ${
+                        selectedPaper === wrapper.name ? "selected" : ""
+                      }`}
+                      onClick={() => setSelectedPaper(wrapper.name)}
+                    >
+                      <span>{wrapper.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FLOWERS */}
+          <section className="customizer-section">
+            <p className="customizer-eyebrow">Step 3</p>
 
             <h2>Add flowers</h2>
 
             <div className="flower-grid">
-              {flowerOptions.map((item) => (
-                <div
-                  className={`flower-option ${
-                    selectedFlowers.includes(item.id) ? "selected" : ""
-                  }`}
-                  key={item.id}
-                >
-                  <span
-                    className="flower-dot"
-                    style={{ background: item.color }}
-                    aria-hidden="true"
-                  />
+              {flowerOptions.map((item) => {
+                const quantity = getFlowerQuantity(item.id);
 
-                  <span>
-                    <strong>{item.name}</strong>
-                    <small>+₱{item.price}.00</small>
-                  </span>
+                return (
+                  <div
+                    className={`flower-option ${
+                      selectedFlowers.includes(item.id) ? "selected" : ""
+                    }`}
+                    key={item.id}
+                  >
+                    <span
+                      className="flower-dot"
+                      style={{ background: item.color }}
+                      aria-hidden="true"
+                    />
 
-                  <div className="flower-actions">
-                    <button
-                      type="button"
-                      className="view-flower-button"
-                      onClick={() => navigate(`/flower-details/${item.id}`)}
-                    >
-                      View Flower
-                    </button>
+                    <span>
+                      <strong>{item.name}</strong>
 
-                    <button
-                      type="button"
-                      className={`flower-add-button ${
-                        bouquetItems.some(
-                          (flower) => Number(flower.id) === Number(item.id),
-                        )
-                          ? "remove"
-                          : ""
-                      }`}
-                      onClick={() => toggleFlower(item)}
-                    >
-                      {bouquetItems.some(
-                        (flower) => Number(flower.id) === Number(item.id),
-                      )
-                        ? "Remove"
-                        : "Add"}
-                    </button>
+                      <small>+₱{item.price}.00 each</small>
+                    </span>
+
+                    <div className="flower-actions">
+                      <button
+                        type="button"
+                        className="flower-quantity-button"
+                        onClick={() => updateFlowerQuantity(item, -1)}
+                        aria-label={`Decrease ${item.name} quantity`}
+                        disabled={quantity === 0}
+                      >
+                        −
+                      </button>
+
+                      <span className="flower-quantity">{quantity}</span>
+
+                      <button
+                        type="button"
+                        className="flower-quantity-button"
+                        onClick={() => updateFlowerQuantity(item, 1)}
+                        aria-label={`Increase ${item.name} quantity`}
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
 
+          {/* EXTRAS */}
           <section className="customizer-section">
-            <p className="customizer-eyebrow">Step 3</p>
+            <p className="customizer-eyebrow">Step 4</p>
 
             <h2>Add something special</h2>
 
@@ -277,6 +505,7 @@ function BouquetCustomizer() {
           </section>
         </div>
 
+        {/* SUMMARY */}
         <aside className="customizer-summary">
           <p className="customizer-eyebrow">Your design</p>
 
@@ -297,7 +526,20 @@ function BouquetCustomizer() {
           <div className="summary-lines">
             <div>
               <span>Base bouquet</span>
+
               <strong>₱{template.price}.00</strong>
+            </div>
+
+            <div>
+              <span>Paper Size</span>
+
+              <strong>{selectedPaperSize}</strong>
+            </div>
+
+            <div>
+              <span>Bouquet Wrapper</span>
+
+              <strong>{selectedPaper}</strong>
             </div>
 
             {bouquetItems.map((item) => (
@@ -313,6 +555,7 @@ function BouquetCustomizer() {
             {greetingCard && (
               <div>
                 <span>Greeting card</span>
+
                 <strong>+₱50.00</strong>
               </div>
             )}
@@ -320,6 +563,7 @@ function BouquetCustomizer() {
             {plushToy && (
               <div>
                 <span>Mini stuff toy</span>
+
                 <strong>+₱120.00</strong>
               </div>
             )}
@@ -327,6 +571,7 @@ function BouquetCustomizer() {
 
           <div className="summary-total">
             <span>Total</span>
+
             <strong>₱{total}.00</strong>
           </div>
 
