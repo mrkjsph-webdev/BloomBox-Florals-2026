@@ -72,6 +72,7 @@ function BouquetCustomizer() {
     topic: null,
     style: null,
   });
+
   const [messages, setMessages] = useState([
     {
       sender: "bot",
@@ -106,25 +107,27 @@ function BouquetCustomizer() {
   function handleChatFAQ(question) {
     setChatInput(question);
 
-    // Let the normal chatbot logic handle the FAQ
     setTimeout(() => {
       handleChat();
     }, 0);
   }
+
   function handleChat(inputMessage = chatInput) {
     if (!inputMessage.trim()) return;
 
     const userMessage = inputMessage.trim();
     const message = userMessage.toLowerCase();
 
-    setMessages((prev) => [...prev, { sender: "user", text: userMessage }]);
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: "user",
+        text: userMessage,
+      },
+    ]);
 
     let response = "";
     let newContext = { ...chatContext };
-
-    // =========================================================
-    // FLOWER DATA
-    // =========================================================
 
     const flowers = {
       rose: { name: "roses", price: 80 },
@@ -151,10 +154,7 @@ function BouquetCustomizer() {
         return new RegExp(`\\b${word}\\b`, "i").test(message);
       });
 
-    // =========================================================
-    // 1. GREETING / START CONVERSATION
-    // =========================================================
-
+    // GREETING
     if (
       hasAny([
         "hello",
@@ -173,12 +173,7 @@ function BouquetCustomizer() {
       newContext = {
         topic: "occasion",
       };
-    }
-
-    // =========================================================
-    // 2. OCCASION
-    // =========================================================
-    else if (hasAny(["birthday", "birthdays"])) {
+    } else if (hasAny(["birthday", "birthdays"])) {
       response =
         "For a birthday bouquet, something cheerful and colorful works beautifully. 🌻 Sunflowers, tulips, and daisies are great directions. Would you like the bouquet to feel bright and playful or soft and elegant?";
 
@@ -187,7 +182,16 @@ function BouquetCustomizer() {
         topic: "bouquet_style",
         occasion: "birthday",
       };
-    } else if (hasAny(["anniversary", "anniv", "valentine", "valentines", "wedding", "wedding anniversary"])) {
+    } else if (
+      hasAny([
+        "anniversary",
+        "anniv",
+        "valentine",
+        "valentines",
+        "wedding",
+        "wedding anniversary",
+      ])
+    ) {
       response =
         "For an anniversary or Valentine's bouquet, a romantic arrangement would be a lovely direction. 🌹 Roses and peonies are natural choices. Would you like something soft and delicate or more elegant?";
 
@@ -225,12 +229,7 @@ function BouquetCustomizer() {
         topic: "bouquet_style",
         occasion: "just_because",
       };
-    }
-
-    // =========================================================
-    // 3. STYLE / MOOD
-    // =========================================================
-    else if (hasAny(["romantic", "romance", "love"])) {
+    } else if (hasAny(["romantic", "romance", "love"])) {
       response =
         "Romantic sounds lovely. 🌹 I'd start with roses or peonies. For the presentation, Tissue Paper would keep everything soft and delicate. Do you want the bouquet to be simple or fuller?";
 
@@ -266,12 +265,7 @@ function BouquetCustomizer() {
         topic: "bouquet_size",
         style: "cheerful",
       };
-    }
-
-    // =========================================================
-    // 4. SIZE / FULLNESS
-    // =========================================================
-    else if (
+    } else if (
       (chatContext.topic === "bouquet_size" ||
         chatContext.topic === "paper_size") &&
       hasAny(["small", "simple", "medium", "full", "fuller", "large", "big"])
@@ -299,12 +293,7 @@ function BouquetCustomizer() {
         topic: "wrapper",
         preferredSize: size,
       };
-    }
-
-    // =========================================================
-    // 5. SPECIFIC FLOWER
-    // =========================================================
-    else if (flowerKey) {
+    } else if (flowerKey) {
       const flower = flowers[flowerKey];
 
       newContext = {
@@ -314,20 +303,19 @@ function BouquetCustomizer() {
       };
 
       if (hasAny(["price", "cost", "how much"])) {
-        response = `${flower.name.charAt(0).toUpperCase() + flower.name.slice(1)} are ₱${flower.price} each.`;
+        response = `${
+          flower.name.charAt(0).toUpperCase() + flower.name.slice(1)
+        } are ₱${flower.price} each.`;
       } else {
         response =
-          `${flower.name.charAt(0).toUpperCase() + flower.name.slice(1)} are available for ₱${flower.price} each. ` +
+          `${
+            flower.name.charAt(0).toUpperCase() + flower.name.slice(1)
+          } are available for ₱${flower.price} each. ` +
           (chatContext.style
             ? `They can work well with the ${chatContext.style} direction you're going for.`
             : "If you'd like, tell me the occasion and I can help you decide whether they fit your bouquet.");
       }
-    }
-
-    // =========================================================
-    // 6. WRAPPER
-    // =========================================================
-    else if (hasAny(["kraft", "tissue", "wrapping paper", "cellophane"])) {
+    } else if (hasAny(["kraft", "tissue", "wrapping paper", "cellophane"])) {
       newContext = {
         ...newContext,
         topic: "extras",
@@ -347,12 +335,7 @@ function BouquetCustomizer() {
         response =
           "Cellophane costs ₱25 and gives the bouquet a clean, transparent finish. Would you like to add a greeting card or mini stuff toy?";
       }
-    }
-
-    // =========================================================
-    // 7. GENERAL FLOWERS
-    // =========================================================
-    else if (
+    } else if (
       hasAny([
         "what flowers",
         "available flowers",
@@ -367,12 +350,7 @@ function BouquetCustomizer() {
         ...newContext,
         topic: "flower_faq_followup",
       };
-    }
-
-    // =========================================================
-    // 8. PAPER SIZE INFORMATION
-    // =========================================================
-    else if (hasAny(["paper size", "sizes", "what sizes", "size options"])) {
+    } else if (hasAny(["paper size", "sizes", "what sizes", "size options"])) {
       response =
         "We have Small, Medium, and Large paper sizes. 🌸 Small is better for a compact arrangement, Medium gives you more room, and Large works well for fuller bouquets. Are you going for a simple bouquet or something fuller?";
 
@@ -380,12 +358,7 @@ function BouquetCustomizer() {
         ...newContext,
         topic: "paper_size",
       };
-    }
-
-    // =========================================================
-    // 9. PRICE / CURRENT TOTAL
-    // =========================================================
-    else if (
+    } else if (
       hasAny([
         "my total",
         "total price",
@@ -400,12 +373,7 @@ function BouquetCustomizer() {
         ...newContext,
         topic: "price",
       };
-    }
-
-    // =========================================================
-    // 10. CURRENT BOUQUET
-    // =========================================================
-    else if (
+    } else if (
       hasAny([
         "what did i add",
         "what did i choose",
@@ -436,12 +404,7 @@ function BouquetCustomizer() {
         ...newContext,
         topic: "current_bouquet",
       };
-    }
-
-    // =========================================================
-    // 11. CARE
-    // =========================================================
-    else if (hasAny(["care", "keep fresh", "keep them fresh", "preserve"])) {
+    } else if (hasAny(["care", "keep fresh", "keep them fresh", "preserve"])) {
       response =
         "To keep fresh flowers looking their best, keep them away from direct sunlight and excessive heat. Make sure they have enough water and avoid letting the stems dry out. 🌿";
 
@@ -449,12 +412,7 @@ function BouquetCustomizer() {
         ...newContext,
         topic: "care",
       };
-    }
-
-    // =========================================================
-    // 12. EXTRAS
-    // =========================================================
-    else if (hasAny(["card", "stuff toy", "plush", "extra", "gift"])) {
+    } else if (hasAny(["card", "stuff toy", "plush", "extra", "gift"])) {
       response =
         "You can finish the bouquet with a greeting card for ₱50 or a mini stuff toy for ₱120. 🎁 Would you like to keep the bouquet simple or add one of those touches?";
 
@@ -462,11 +420,7 @@ function BouquetCustomizer() {
         ...newContext,
         topic: "extras",
       };
-    }
-    // =========================================================
-    // 13. CONTEXT-AWARE YES / CONTINUE
-    // =========================================================
-    else if (
+    } else if (
       hasAny([
         "no thanks",
         "no thank",
@@ -502,7 +456,9 @@ function BouquetCustomizer() {
             ? bouquetItems
                 .map(
                   (item) =>
-                    `${item.name} × ${item.quantity} = ₱${item.price * item.quantity}`,
+                    `${item.name} × ${item.quantity} = ₱${
+                      item.price * item.quantity
+                    }`,
                 )
                 .join(", ")
             : "No additional flowers";
@@ -531,6 +487,7 @@ function BouquetCustomizer() {
           topic: "price_breakdown",
         };
       }
+
       if (chatContext.topic === "wrapper") {
         response =
           "Great! 🌸 For your bouquet, you can choose from Kraft Paper, Tissue Paper, Wrapping Paper, or Cellophane. If you're going for the style we discussed, I'd suggest Tissue Paper for a softer look or Kraft Paper for something more elegant. Which one would you like?";
@@ -539,10 +496,7 @@ function BouquetCustomizer() {
           ...newContext,
           topic: "wrapper_choice",
         };
-      }
-
-      // User said YES after being asked about extras
-      else if (chatContext.topic === "extras") {
+      } else if (chatContext.topic === "extras") {
         response =
           "Lovely! 🎁 You can add a greeting card for ₱50 or a mini stuff toy for ₱120. Which would you like to add?";
 
@@ -550,10 +504,7 @@ function BouquetCustomizer() {
           ...newContext,
           topic: "extras_choice",
         };
-      }
-
-      // User said YES after skipping extras
-      else if (chatContext.topic === "flowers") {
+      } else if (chatContext.topic === "flowers") {
         response =
           "Of course! 🌷 You can choose from roses, tulips, sunflowers, lilies, daisies, orchids, carnations, and peonies. Which flowers would you like to add?";
 
@@ -561,10 +512,7 @@ function BouquetCustomizer() {
           ...newContext,
           topic: "flower",
         };
-      }
-
-      // User said YES after discussing bouquet size
-      else if (chatContext.topic === "bouquet_size") {
+      } else if (chatContext.topic === "bouquet_size") {
         response =
           "Perfect! 🌷 For the next step, let's choose the wrapping. We have Kraft Paper, Tissue Paper, Wrapping Paper, and Cellophane. Which style would you like?";
 
@@ -572,10 +520,7 @@ function BouquetCustomizer() {
           ...newContext,
           topic: "wrapper",
         };
-      }
-
-      // User said YES after discussing style
-      else if (chatContext.topic === "bouquet_style") {
+      } else if (chatContext.topic === "bouquet_style") {
         response =
           "Great! 🌸 Now let's choose the bouquet size. Small is compact, Medium gives you more room, and Large is best for a fuller arrangement. Which size sounds right for you?";
 
@@ -583,10 +528,7 @@ function BouquetCustomizer() {
           ...newContext,
           topic: "bouquet_size",
         };
-      }
-
-      // Fallback
-      else {
+      } else {
         response =
           "Absolutely! 🌷 Tell me what you'd like to choose next—flowers, size, wrapping, or extras.";
 
@@ -595,27 +537,13 @@ function BouquetCustomizer() {
           topic: "next_step",
         };
       }
-    }
-
-    // =========================================================
-    // 14. THANK YOU
-    // =========================================================
-    else if (hasAny(["thank you", "thanks", "thank u"])) {
+    } else if (hasAny(["thank you", "thanks", "thank u"])) {
       response =
         "You're welcome! 🌷 I'm here if you want to keep building the bouquet.";
-    }
-
-    // =========================================================
-    // 15. FALLBACK — KEEP GUIDING THE USER
-    // =========================================================
-    else {
+    } else {
       response =
         "Let's build it together. 🌸 You can tell me the occasion you're shopping for, the style you like, or simply say something like “I want a romantic bouquet” and I'll guide you from there.";
     }
-
-    // =========================================================
-    // UPDATE
-    // =========================================================
 
     setChatContext(newContext);
     setChatInput("");
@@ -656,6 +584,133 @@ function BouquetCustomizer() {
       plushToy,
     ],
   );
+
+  /*
+   * Add the customized bouquet to the database cart.
+   * After a successful database save, redirect to Shopping Cart.
+   */
+  async function handleAddToCart() {
+    const storedClient = localStorage.getItem("client");
+
+    if (!storedClient) {
+      navigate("/login");
+      return;
+    }
+
+    let client;
+
+    try {
+      client = JSON.parse(storedClient);
+    } catch (error) {
+      console.error("Invalid client session:", error);
+      localStorage.removeItem("client");
+      navigate("/login");
+      return;
+    }
+
+    if (!client?.client_id) {
+      navigate("/login");
+      return;
+    }
+
+    const customization = {
+      template: {
+        id: template.id,
+        name: template.name,
+        price: template.price,
+      },
+
+      paper_size: {
+        name: selectedPaperSize,
+        price: selectedSize?.price || 0,
+      },
+
+      wrapper: {
+        name: selectedPaper,
+        price: selectedWrapper?.price || 0,
+      },
+
+      flowers: bouquetItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+        unit_price: item.price,
+      })),
+
+      greeting_card: greetingCard,
+
+      plush_toy: plushToy,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost/bbf_clientdb/add_to_cart.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            client_id: client.client_id,
+            unit_price: total,
+            customization: JSON.stringify(customization),
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      console.log("Add to cart response:", data);
+
+      if (!data.success) {
+        throw new Error(data.message || "Failed to add item to cart.");
+      }
+
+      /*
+       * Clear the temporary bouquet flower selections
+       * only after the database save succeeds.
+       */
+      const storageKey = `bouquetFlowers_${client.client_id}`;
+
+      sessionStorage.removeItem(storageKey);
+
+      setBouquetItems([]);
+      setSelectedFlowers([]);
+
+      setAdded(true);
+
+      /*
+       * Keep the frontend cart synchronized with
+       * the database so the Header cart count updates.
+       */
+      const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      const cartItem = {
+        item_id: data.item_id,
+        id: data.item_id,
+        cart_id: data.cart_id,
+        name: template.name,
+        category: "Custom Bouquet",
+        quantity: 1,
+        price: total,
+        customization,
+      };
+
+      const updatedCart = [...currentCart, cartItem];
+
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+      window.dispatchEvent(new Event("cartUpdated"));
+
+      /*
+       * Navigate to Shopping Cart only after
+       * the database save succeeds.
+       */
+      navigate("/shopping-cart");
+    } catch (error) {
+      console.error("Failed to add bouquet to cart:", error);
+    }
+  }
 
   function updateFlowerQuantity(item, change) {
     const client = JSON.parse(localStorage.getItem("client"));
@@ -724,7 +779,6 @@ function BouquetCustomizer() {
 
   return (
     <main className="customizer-page">
-      {/* LEFT SIDE AI MINI CHAT */}
       <section className={`ai-mini-chat ${showChat ? "open" : ""}`}>
         {!showChat ? (
           <button
@@ -733,6 +787,7 @@ function BouquetCustomizer() {
             onClick={() => setShowChat(true)}
           >
             <span className="ai-mini-icon">✨</span>
+
             <span>Ask AI</span>
           </button>
         ) : (
@@ -740,6 +795,7 @@ function BouquetCustomizer() {
             <div className="ai-mini-header">
               <div>
                 <strong>Chloris 1.0</strong>
+
                 <small>Your Friendly Assistant for bouquet customization</small>
               </div>
 
@@ -833,7 +889,6 @@ function BouquetCustomizer() {
 
       <section className="customizer-layout">
         <div className="customizer-options">
-          {/* TEMPLATE */}
           <section className="customizer-section">
             <p className="customizer-eyebrow">Step 1</p>
 
@@ -869,7 +924,6 @@ function BouquetCustomizer() {
             </div>
           </section>
 
-          {/* PAPER SIZE AND BOUQUET WRAPPER */}
           <section className="customizer-section">
             <p className="customizer-eyebrow">Step 2</p>
 
@@ -890,6 +944,10 @@ function BouquetCustomizer() {
                       onClick={() => setSelectedPaperSize(size.name)}
                     >
                       <span>{size.name}</span>
+
+                      <small>
+                        {size.price === 0 ? "Included" : `+₱${size.price}.00`}
+                      </small>
                     </button>
                   ))}
                 </div>
@@ -909,6 +967,8 @@ function BouquetCustomizer() {
                       onClick={() => setSelectedPaper(wrapper.name)}
                     >
                       <span>{wrapper.name}</span>
+
+                      <small>+₱{wrapper.price}.00</small>
                     </button>
                   ))}
                 </div>
@@ -916,7 +976,6 @@ function BouquetCustomizer() {
             </div>
           </section>
 
-          {/* FLOWERS */}
           <section className="customizer-section">
             <p className="customizer-eyebrow">Step 3</p>
 
@@ -935,7 +994,9 @@ function BouquetCustomizer() {
                   >
                     <span
                       className="flower-dot"
-                      style={{ background: item.color }}
+                      style={{
+                        background: item.color,
+                      }}
                       aria-hidden="true"
                     />
 
@@ -973,7 +1034,6 @@ function BouquetCustomizer() {
             </div>
           </section>
 
-          {/* EXTRAS */}
           <section className="customizer-section">
             <p className="customizer-eyebrow">Step 4</p>
 
@@ -1013,7 +1073,6 @@ function BouquetCustomizer() {
           </section>
         </div>
 
-        {/* SUMMARY */}
         <aside className="customizer-summary">
           <p className="customizer-eyebrow">Your design</p>
 
@@ -1056,7 +1115,10 @@ function BouquetCustomizer() {
                   {item.name} × {item.quantity}
                 </span>
 
-                <strong>+₱{item.price * item.quantity}.00</strong>
+                <strong>
+                  +₱
+                  {(item.price * item.quantity).toFixed(2)}
+                </strong>
               </div>
             ))}
 
@@ -1083,9 +1145,13 @@ function BouquetCustomizer() {
             <strong>₱{total}.00</strong>
           </div>
 
-          <Link to="/shopping-cart" className="add-cart-button">
-            Add to Cart
-          </Link>
+          <button
+            type="button"
+            className="add-cart-button"
+            onClick={handleAddToCart}
+          >
+            {added ? "Added to Cart" : "Add to Cart"}
+          </button>
         </aside>
       </section>
     </main>
