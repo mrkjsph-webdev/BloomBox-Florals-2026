@@ -214,6 +214,7 @@ const AI_WRAPPERS = {
   },
 };
 
+
 function normalizeAIInput(value = "") {
   return String(value)
     .toLowerCase()
@@ -245,16 +246,11 @@ function aiDetectOccasion(message) {
 }
 
 function aiDetectStyle(message) {
-  const scores = Object.entries(AI_PROFILES).map(([style, profile]) => ({
-    style,
-    score: aiHasAny(message, profile.keywords) ? 1 : 0,
-  }));
+  const matches = Object.entries(AI_PROFILES)
+    .filter(([, profile]) => aiHasAny(message, profile.keywords))
+    .map(([style]) => style);
 
-  const match = scores
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)[0];
-
-  return match?.style || null;
+  return matches[0] || null;
 }
 
 function aiDetectFlower(message) {
@@ -262,6 +258,12 @@ function aiDetectFlower(message) {
     Object.keys(AI_FLOWER_DATA).find((key) =>
       aiHasAny(message, AI_FLOWER_DATA[key].keywords),
     ) || null
+  );
+}
+
+function aiDetectAllFlowers(message) {
+  return Object.keys(AI_FLOWER_DATA).filter((key) =>
+    aiHasAny(message, AI_FLOWER_DATA[key].keywords),
   );
 }
 
@@ -274,31 +276,27 @@ function aiDetectWrapper(message) {
 }
 
 function aiDetectSize(message) {
-  if (aiHasAny(message, ["small", "compact", "simple"])) return "Small";
-  if (aiHasAny(message, ["medium", "mid"])) return "Medium";
+  if (aiHasAny(message, ["small", "compact"])) return "Small";
+  if (aiHasAny(message, ["medium", "mid size", "mid-sized"])) return "Medium";
   if (aiHasAny(message, ["large", "big", "full", "fuller"])) return "Large";
   return null;
 }
 
 function aiDetectBudget(message) {
-  const normalized = normalizeAIInput(message);
+  const normalized = normalizeAIInput(message).replace(/,/g, "");
 
-  const pesoMatch = normalized.match(
-    /(?:₱|php|pesos?|budget(?:\s+of|\s+is)?|around|under|below|maximum|max)\s*(\d{2,5}(?:[.,]\d{1,2})?)/i,
-  );
+  const patterns = [
+    /(?:₱|php|pesos?)\s*(\d{2,5}(?:\.\d{1,2})?)/i,
+    /(?:budget|maximum|max|around|under|below|less than|up to|spend|spending|only)\s*(?:is|of|around|about|up to|under|below)?\s*(?:₱|php|pesos?)?\s*(\d{2,5}(?:\.\d{1,2})?)/i,
+    /(?:i have|my budget is|i can spend|i want to spend|i only have)\s*(?:₱|php|pesos?)?\s*(\d{2,5}(?:\.\d{1,2})?)/i,
+  ];
 
-  if (pesoMatch) {
-    const value = Number(pesoMatch[1].replace(/,/g, ""));
-    return Number.isFinite(value) ? value : null;
-  }
-
-  const numberMatch = normalized.match(
-    /(?:i have|my budget is|budget is|spend|spending|only)\s*(?:₱|php)?\s*(\d{2,5})/i,
-  );
-
-  if (numberMatch) {
-    const value = Number(numberMatch[1]);
-    return Number.isFinite(value) ? value : null;
+  for (const pattern of patterns) {
+    const match = normalized.match(pattern);
+    if (match) {
+      const value = Number(match[1]);
+      if (Number.isFinite(value)) return value;
+    }
   }
 
   return null;
@@ -316,6 +314,7 @@ function aiDetectRecipient(message) {
       "fiancee",
       "crush",
       "someone special",
+      "special someone",
     ])
   ) {
     return "someone special";
@@ -324,7 +323,7 @@ function aiDetectRecipient(message) {
   if (aiHasAny(message, ["mom", "mother", "mama", "nanay"])) return "mom";
   if (aiHasAny(message, ["dad", "father", "papa", "tatay"])) return "dad";
   if (aiHasAny(message, ["friend", "bestie", "best friend"])) return "friend";
-  if (aiHasAny(message, ["myself", "me"])) return "myself";
+  if (aiHasAny(message, ["myself", "for me", "for myself"])) return "myself";
 
   return null;
 }
@@ -334,13 +333,108 @@ function aiDetectBudgetIntent(message) {
     "budget",
     "affordable",
     "cheap",
+    "cheapest",
     "inexpensive",
     "not too expensive",
     "within my budget",
     "dont want to spend",
-    "don't want to spend",
+    "do not want to spend",
     "save money",
+    "under",
+    "below",
+    "less than",
+    "up to",
+    "maximum",
   ]);
+}
+
+function aiDetectQuestionTypes(message) {
+  return {
+    total: aiHasAny(message, [
+      "my total",
+      "current total",
+      "total cost",
+      "total price",
+      "how much is my bouquet",
+      "how much will my bouquet cost",
+      "how much does my bouquet cost",
+      "what is my current price",
+    ]),
+    flowerPrice: aiHasAny(message, [
+      "price of",
+      "cost of",
+      "how much is a",
+      "how much are",
+      "how much does a",
+      "how much do",
+      "per flower",
+      "each flower",
+    ]),
+    flowers: aiHasAny(message, [
+      "what flowers",
+      "available flowers",
+      "flowers do you have",
+      "what flower options",
+      "flower options",
+      "what kinds of flowers",
+      "which flowers are available",
+    ]),
+    paperSizes: aiHasAny(message, [
+      "paper size",
+      "paper sizes",
+      "what sizes",
+      "size options",
+      "what size",
+    ]),
+    wrapper: aiHasAny(message, [
+      "wrapper",
+      "wrappers",
+      "wrapping",
+      "paper options",
+      "what wrapping",
+    ]),
+    extras: aiHasAny(message, [
+      "greeting card",
+      "stuff toy",
+      "plush",
+      "extra",
+      "extras",
+      "add ons",
+      "add-ons",
+    ]),
+    care: aiHasAny(message, [
+      "care",
+      "keep fresh",
+      "keep them fresh",
+      "preserve",
+      "last longer",
+      "make flowers last",
+    ]),
+    templates: aiHasAny(message, [
+      "template",
+      "templates",
+      "bouquet design",
+      "base bouquet",
+    ]),
+    currentBouquet: aiHasAny(message, [
+      "what did i add",
+      "what did i choose",
+      "my bouquet",
+      "my selections",
+      "whats in my bouquet",
+      "what is in my bouquet",
+      "show my bouquet",
+      "current bouquet",
+      "what have i selected",
+    ]),
+    cheapest: aiHasAny(message, [
+      "cheapest flower",
+      "least expensive flower",
+      "lowest price flower",
+      "most affordable flower",
+      "cheapest option",
+    ]),
+  };
 }
 
 function aiGetCurrentFlowerKeys(bouquetItems) {
@@ -349,42 +443,12 @@ function aiGetCurrentFlowerKeys(bouquetItems) {
       Object.keys(AI_FLOWER_DATA).find(
         (key) =>
           normalizeAIInput(AI_FLOWER_DATA[key].singular) ===
-          normalizeAIInput(item.name) ||
+            normalizeAIInput(item.name) ||
           normalizeAIInput(AI_FLOWER_DATA[key].name) ===
-          normalizeAIInput(item.name),
+            normalizeAIInput(item.name),
       ),
     )
     .filter(Boolean);
-}
-
-function aiRecommendFlowers({
-  occasion,
-  style,
-  budget,
-  selectedFlowers = [],
-  preferredFlower,
-}) {
-  const scored = Object.entries(AI_FLOWER_DATA).map(([key, flower]) => {
-    let score = 0;
-
-    if (occasion && flower.occasions.includes(occasion)) score += 6;
-    if (style && flower.styles.includes(style)) score += 6;
-    if (preferredFlower === key) score += 10;
-    if (selectedFlowers.includes(key)) score -= 5;
-
-    // Prefer lower-priced flowers when the client explicitly mentions budget.
-    if (budget && flower.price <= Math.max(60, budget / 8)) {
-      score += 2;
-    }
-
-    return { key, score };
-  });
-
-  return scored
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3)
-    .map((item) => item.key);
 }
 
 function aiGetRecommendedWrapper(style, currentWrapper) {
@@ -402,28 +466,6 @@ function aiGetRecommendedWrapper(style, currentWrapper) {
   return "kraft";
 }
 
-function aiFormatRecommendation({
-  occasion,
-  style,
-  flowers,
-  wrapper,
-  size,
-  budget,
-}) {
-  const flowerNames = flowers.map((key) => AI_FLOWER_DATA[key].name).join(" + ");
-  const styleLabel = AI_PROFILES[style]?.label || "balanced";
-  const occasionLabel = AI_OCCASIONS[occasion]?.label || "your occasion";
-  const budgetText = budget ? ` while keeping your ₱${budget} budget in mind` : "";
-
-  return (
-    `For ${occasionLabel}${budgetText}, I'd suggest a ${styleLabel} bouquet. 🌷\n\n` +
-    `🌸 Flowers: ${flowerNames || "a balanced flower mix"}\n` +
-    `🎀 Wrapper: ${AI_WRAPPERS[wrapper]?.name || "Kraft Paper"}\n` +
-    `📏 Size: ${size || "Medium"}\n\n` +
-    `This combination matches the details you've shared so far.`
-  );
-}
-
 function aiGetBouquetSummary({
   template,
   selectedPaperSize,
@@ -436,8 +478,8 @@ function aiGetBouquetSummary({
   const flowers =
     bouquetItems.length > 0
       ? bouquetItems
-        .map((item) => `${item.name} × ${item.quantity}`)
-        .join(", ")
+          .map((item) => `${item.name} × ${item.quantity}`)
+          .join(", ")
       : "no additional flowers";
 
   const extras = [];
@@ -450,6 +492,144 @@ function aiGetBouquetSummary({
     `Current total: ₱${total.toLocaleString()}.`
   );
 }
+
+function aiGetRecommendationCandidates({
+  occasion,
+  style,
+  budget,
+  preferredFlower,
+  selectedFlowers = [],
+}) {
+  const scored = Object.entries(AI_FLOWER_DATA).map(([key, flower]) => {
+    let score = 0;
+
+    if (occasion && flower.occasions.includes(occasion)) score += 8;
+    if (style && flower.styles.includes(style)) score += 8;
+    if (preferredFlower === key) score += 20;
+    if (selectedFlowers.includes(key)) score -= 6;
+
+    if (budget !== null && budget !== undefined) {
+      if (flower.price <= 60) score += 3;
+      else if (flower.price <= 70) score += 2;
+      else if (flower.price <= 80) score += 1;
+    }
+
+    return { key, score };
+  });
+
+  return scored
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((item) => item.key);
+}
+
+function aiBuildRecommendation({
+  occasion,
+  style,
+  budget,
+  preferredFlower,
+  selectedFlowers = [],
+  template,
+  size,
+  wrapper,
+}) {
+  const resolvedOccasion = occasion || "just_because";
+  const resolvedStyle =
+    style || AI_OCCASIONS[resolvedOccasion]?.styles?.[0] || "soft";
+  const resolvedSize = size || "Medium";
+  const resolvedWrapper =
+    wrapper || aiGetRecommendedWrapper(resolvedStyle);
+
+  const sizeData = paperSizes.find((item) => item.name === resolvedSize);
+  const wrapperData = bouquetWrappers.find(
+    (item) => item.name === AI_WRAPPERS[resolvedWrapper]?.name,
+  );
+
+  const fixedCost =
+    (template?.price || 0) +
+    (sizeData?.price || 0) +
+    (wrapperData?.price || 0);
+
+  const candidates = aiGetRecommendationCandidates({
+    occasion: resolvedOccasion,
+    style: resolvedStyle,
+    budget,
+    preferredFlower,
+    selectedFlowers,
+  });
+
+  let flowers = candidates.slice(0, 3);
+
+  if (budget !== null && budget !== undefined) {
+    const affordable = [];
+
+    for (const key of candidates) {
+      const flowerPrice = AI_FLOWER_DATA[key].price;
+      if (fixedCost + flowerPrice <= budget) {
+        affordable.push(key);
+      }
+    }
+
+    flowers = affordable.slice(0, 3);
+
+    // If the budget is too low for even one flower, do not pretend it fits.
+    if (!flowers.length) {
+      flowers = candidates.slice(0, 1);
+    }
+  }
+
+  if (!flowers.length) {
+    flowers = ["rose"];
+  }
+
+  const flowerCost = flowers.reduce(
+    (sum, key) => sum + AI_FLOWER_DATA[key].price,
+    0,
+  );
+
+  return {
+    occasion: resolvedOccasion,
+    style: resolvedStyle,
+    flowers,
+    wrapper: resolvedWrapper,
+    size: resolvedSize,
+    estimatedTotal: fixedCost + flowerCost,
+    fixedCost,
+    budgetExceeded:
+      budget !== null &&
+      budget !== undefined &&
+      fixedCost + flowerCost > budget,
+  };
+}
+
+function aiFormatRecommendation(recommendation, budget) {
+  const flowerNames = recommendation.flowers
+    .map((key) => `${AI_FLOWER_DATA[key].singular} (₱${AI_FLOWER_DATA[key].price})`)
+    .join(" + ");
+
+  const styleLabel =
+    AI_PROFILES[recommendation.style]?.label || "balanced";
+  const occasionLabel =
+    AI_OCCASIONS[recommendation.occasion]?.label || "your occasion";
+
+  let budgetLine = "";
+  if (budget !== null && budget !== undefined) {
+    budgetLine = recommendation.budgetExceeded
+      ? `\n⚠️ This estimate is ₱${recommendation.estimatedTotal.toLocaleString()}, which is above your ₱${budget.toLocaleString()} budget. I would keep the current setup and change the flowers or size to bring it down.`
+      : `\n💰 Estimated total: ₱${recommendation.estimatedTotal.toLocaleString()} — within your ₱${budget.toLocaleString()} budget.`;
+  } else {
+    budgetLine = `\n💰 Estimated total: ₱${recommendation.estimatedTotal.toLocaleString()}.`;
+  }
+
+  return (
+    `For ${occasionLabel}, I'd suggest a ${styleLabel} bouquet. 🌷\n\n` +
+    `🌸 Flowers: ${flowerNames}\n` +
+    `🎀 Wrapper: ${AI_WRAPPERS[recommendation.wrapper]?.name || "Kraft Paper"}\n` +
+    `📏 Size: ${recommendation.size}` +
+    budgetLine
+  );
+}
+
 
 function BouquetCustomizer() {
   const navigate = useNavigate();
@@ -589,11 +769,13 @@ function BouquetCustomizer() {
 
     const detectedOccasion = aiDetectOccasion(message);
     const detectedStyle = aiDetectStyle(message);
-    const detectedFlower = aiDetectFlower(message);
+    const detectedFlowers = aiDetectAllFlowers(message);
+    const detectedFlower = detectedFlowers[0] || null;
     const detectedWrapper = aiDetectWrapper(message);
     const detectedSize = aiDetectSize(message);
     const detectedBudget = aiDetectBudget(message);
     const detectedRecipient = aiDetectRecipient(message);
+    const question = aiDetectQuestionTypes(message);
     const mentionsBudget = aiDetectBudgetIntent(message);
 
     const isPositive = aiHasAny(message, [
@@ -608,6 +790,7 @@ function BouquetCustomizer() {
       "go with it",
       "use it",
       "build it",
+      "apply it",
     ]);
 
     const isNegative = aiHasAny(message, [
@@ -620,59 +803,8 @@ function BouquetCustomizer() {
       "different",
     ]);
 
-    const wantsPrice = aiHasAny(message, [
-      "price",
-      "cost",
-      "how much",
-      "total",
-      "budget",
-    ]);
-
-    const wantsCurrentBouquet = aiHasAny(message, [
-      "what did i add",
-      "what did i choose",
-      "my bouquet",
-      "my selections",
-      "whats in my bouquet",
-      "what is in my bouquet",
-      "show my bouquet",
-    ]);
-
-    const wantsFlowers = aiHasAny(message, [
-      "what flowers",
-      "available flowers",
-      "flowers do you have",
-      "what flowers do you have",
-      "flower options",
-    ]);
-
-    const wantsPaperSizes = aiHasAny(message, [
-      "paper size",
-      "paper sizes",
-      "what sizes",
-      "size options",
-    ]);
-
-    const wantsCare = aiHasAny(message, [
-      "care",
-      "keep fresh",
-      "keep them fresh",
-      "preserve",
-    ]);
-
-    const wantsExtras = aiHasAny(message, [
-      "card",
-      "stuff toy",
-      "plush",
-      "extra",
-      "extras",
-    ]);
-
-    const isThanks = aiHasAny(message, ["thank you", "thanks", "thank u"]);
-
     const currentFlowerKeys = aiGetCurrentFlowerKeys(bouquetItems);
 
-    // Merge newly detected information into the conversation context.
     const mergedOccasion = detectedOccasion || currentContext.occasion;
     const mergedStyle = detectedStyle || currentContext.style;
     const mergedRecipient =
@@ -699,18 +831,123 @@ function BouquetCustomizer() {
     };
 
     /*
-     * Priority 1: direct information requests.
-     * These should always answer the question instead of forcing the user
-     * through the guided flow.
+     * Priority 1:
+     * Answer factual questions first.
+     * This prevents Chloris from accidentally turning a question like
+     * "How much are roses?" into a recommendation flow.
      */
-    if (isThanks) {
+
+    if (question.total) {
       response =
-        "You're welcome! 🌷 I'm here whenever you want to refine your bouquet.";
+        `Your current bouquet total is ₱${total.toLocaleString()}. 💐 ` +
+        `That includes ${template.name} (₱${template.price}), ` +
+        `${selectedPaperSize} paper (+₱${selectedSize?.price || 0}), ` +
+        `${selectedPaper} (+₱${selectedWrapper?.price || 0}), ` +
+        `${bouquetItems.length ? "your selected flowers" : "no additional flowers"}, ` +
+        `${greetingCard ? "a greeting card (+₱50)" : "no greeting card"}, ` +
+        `and ${plushToy ? "a mini stuff toy (+₱120)" : "no mini stuff toy"}.`;
+
+      newContext.stage = "review";
+      newContext.topic = "price";
+    } else if (question.flowerPrice) {
+      const flowerMatches =
+        detectedFlowers.length
+          ? detectedFlowers
+          : Object.keys(AI_FLOWER_DATA).filter((key) =>
+              aiHasAny(message, [
+                AI_FLOWER_DATA[key].singular,
+                AI_FLOWER_DATA[key].name,
+              ]),
+            );
+
+      if (flowerMatches.length) {
+        response =
+          flowerMatches
+            .map(
+              (key) =>
+                `🌸 ${AI_FLOWER_DATA[key].singular}: ₱${AI_FLOWER_DATA[key].price} each`,
+            )
+            .join("\n") +
+          `\n\nThese are the current flower prices in BloomBox.`;
+      } else {
+        response =
+          "Here are our current flower prices:\n\n" +
+          Object.values(AI_FLOWER_DATA)
+            .map((flower) => `🌸 ${flower.singular}: ₱${flower.price} each`)
+            .join("\n");
+      }
 
       newContext.stage = "refine";
-      newContext.topic = "refine";
-    } else if (wantsCurrentBouquet) {
-      response = `Here's your current bouquet: ${aiGetBouquetSummary({
+      newContext.topic = "flower";
+    } else if (question.cheapest) {
+      const cheapestPrice = Math.min(
+        ...Object.values(AI_FLOWER_DATA).map((flower) => flower.price),
+      );
+
+      const cheapest = Object.values(AI_FLOWER_DATA)
+        .filter((flower) => flower.price === cheapestPrice)
+        .map((flower) => flower.singular)
+        .join(" and ");
+
+      response =
+        `The most affordable flowers are ${cheapest}, at ₱${cheapestPrice} each. 🌸`;
+
+      newContext.stage = "refine";
+      newContext.topic = "flower";
+    } else if (question.flowers) {
+      response =
+        "We currently have these flowers:\n\n" +
+        Object.values(AI_FLOWER_DATA)
+          .map((flower) => `🌸 ${flower.singular} — ₱${flower.price} each`)
+          .join("\n") +
+        "\n\nTell me your occasion or preferred style and I can recommend which ones fit.";
+      newContext.stage = "understand";
+      newContext.topic = "flowers";
+    } else if (question.paperSizes) {
+      response =
+        "Our paper sizes are:\n\n" +
+        "📏 Small — included\n" +
+        "📏 Medium — +₱30\n" +
+        "📏 Large — +₱60\n\n" +
+        "Small is more compact, Medium is balanced, and Large gives the bouquet a fuller presentation.";
+      newContext.stage = "refine";
+      newContext.topic = "size";
+    } else if (question.wrapper) {
+      response =
+        "Our bouquet wrappers are:\n\n" +
+        Object.values(AI_WRAPPERS)
+          .map(
+            (wrapper) =>
+              `🎀 ${wrapper.name} — +₱${wrapper.price}`,
+          )
+          .join("\n") +
+        "\n\nIf you tell me the style you want, I can suggest a wrapper that matches.";
+      newContext.stage = "refine";
+      newContext.topic = "wrapper";
+    } else if (question.extras) {
+      response =
+        "You can add these optional extras:\n\n" +
+        "💌 Greeting card — +₱50\n" +
+        "🧸 Mini stuff toy — +₱120";
+      newContext.stage = "refine";
+      newContext.topic = "extras";
+    } else if (question.templates) {
+      response =
+        "We currently have three bouquet templates:\n\n" +
+        templates
+          .map(
+            (item) =>
+              `💐 ${item.name} — ₱${item.price}\n${item.description}`,
+          )
+          .join("\n\n");
+      newContext.stage = "refine";
+      newContext.topic = "template";
+    } else if (question.care) {
+      response =
+        "For fresh flowers, keep them away from direct sunlight and excessive heat, use clean water, and avoid letting the stems dry out. 🌿";
+      newContext.topic = "care";
+    } else if (question.currentBouquet) {
+      response = `Here's your current bouquet:\n\n${aiGetBouquetSummary({
         template,
         selectedPaperSize,
         selectedPaper,
@@ -722,47 +959,9 @@ function BouquetCustomizer() {
 
       newContext.stage = "review";
       newContext.topic = "review";
-    } else if (wantsPrice) {
-      response =
-        `Your current bouquet total is ₱${total.toLocaleString()}. 💐 ` +
-        `This includes your ${template.name}, ${selectedPaperSize} paper, ` +
-        `${selectedPaper}, selected flowers, and extras.`;
-
-      newContext.stage = "review";
-      newContext.topic = "price";
-    } else if (wantsFlowers) {
-      response =
-        "We currently have Roses, Tulips, Sunflowers, Lilies, Daisies, Orchids, Carnations, and Peonies. 🌷 " +
-        "If you tell me the occasion or style, I'll narrow them down for you.";
-
-      newContext.stage = "understand";
-      newContext.topic = "flowers";
-    } else if (wantsPaperSizes) {
-      response =
-        "We have Small, Medium, and Large. 🌸 Small is compact, Medium gives you a balanced arrangement, and Large works well for a fuller bouquet.";
-
-      newContext.stage = "refine";
-      newContext.topic = "size";
-    } else if (wantsCare) {
-      response =
-        "To keep fresh flowers looking their best, keep them away from direct sunlight and excessive heat, use clean water, and avoid letting the stems dry out. 🌿";
-
-      newContext.topic = "care";
-    } else if (wantsExtras) {
-      response =
-        "You can add a greeting card for ₱50 or a mini stuff toy for ₱120. 🎁 " +
-        "These are optional finishing touches.";
-
-      newContext.stage = "refine";
-      newContext.topic = "extras";
-    }
-
-    /*
-     * Priority 2: explicit confirmation of an existing recommendation.
-     */
-    else if (
-      isPositive &&
+    } else if (
       currentContext.stage === "recommend" &&
+      isPositive &&
       currentContext.recommendedFlowers?.length
     ) {
       const recommendation = {
@@ -776,86 +975,109 @@ function BouquetCustomizer() {
       applyAIRecommendation(recommendation);
 
       response =
-        `Perfect! 🌷 I've applied the recommendation to your bouquet: ` +
+        `Perfect! 🌷 I've applied the recommendation: ` +
         `${recommendation.flowers
           .map((key) => AI_FLOWER_DATA[key].name)
-          .join(" + ")} with ${AI_WRAPPERS[recommendation.wrapper]?.name}. ` +
-        `You can still change anything in the customizer.`;
-
-      newContext = {
-        ...newContext,
-        stage: "refine",
-        topic: "refine",
-        size: recommendation.size,
-        wrapper: recommendation.wrapper,
-      };
-    }
-
-    /*
-     * Priority 3: client rejects the recommendation.
-     */
-    else if (
-      isNegative &&
-      currentContext.stage === "recommend"
-    ) {
-      response =
-        "No problem! 🌸 What would you like to change? You can tell me the flower, style, size, wrapper, or budget you prefer.";
+          .join(" + ")} with ` +
+        `${AI_WRAPPERS[recommendation.wrapper]?.name || "Kraft Paper"} ` +
+        `and ${recommendation.size} size. You can still edit anything in the customizer.`;
 
       newContext.stage = "refine";
       newContext.topic = "refine";
-    }
-
-    /*
-     * Priority 4: if the client gives an occasion, start understanding
-     * their preference instead of immediately dumping recommendations.
-     */
-    else if (
-      currentContext.stage === "discover" &&
-      (detectedOccasion || detectedStyle || detectedRecipient || detectedFlower)
+    } else if (
+      currentContext.stage === "recommend" &&
+      isNegative
     ) {
-      const occasionLabel =
-        AI_OCCASIONS[mergedOccasion]?.label || null;
+      response =
+        "Of course! 🌸 Tell me what you want to change—flower, style, size, wrapper, or budget.";
+      newContext.stage = "refine";
+      newContext.topic = "refine";
+    } else if (detectedBudget !== null && !detectedOccasion && !detectedStyle && !detectedFlower) {
+      if (currentContext.occasion || currentContext.style || currentContext.preferredFlower) {
+        newContext.stage = "recommend";
+        newContext.topic = "recommend";
+        const recommendation = aiBuildRecommendation({
+          occasion: mergedOccasion,
+          style: mergedStyle,
+          budget: detectedBudget,
+          preferredFlower: mergedFlower,
+          selectedFlowers: currentFlowerKeys,
+          template,
+          size: mergedSize,
+          wrapper: mergedWrapper,
+        });
 
-      if (!mergedStyle && !mergedFlower) {
         response =
-          `Got it! 🌷 ${occasionLabel
-            ? `This is for a ${occasionLabel}.`
-            : "I have the occasion in mind."
-          } ` +
-          `What kind of feeling do you want?`;
+          `Got it — I'll work with a ₱${detectedBudget.toLocaleString()} budget. 💰\n\n` +
+          aiFormatRecommendation(recommendation, detectedBudget) +
+          "\n\nWould you like me to use this recommendation?";
+        newContext = {
+          ...newContext,
+          stage: "recommend",
+          topic: "recommend",
+          recommendedFlowers: recommendation.flowers,
+          size: recommendation.size,
+          wrapper: recommendation.wrapper,
+          occasion: recommendation.occasion,
+          style: recommendation.style,
+        };
+      } else {
+        response =
+          `Got it! Your budget is ₱${detectedBudget.toLocaleString()}. 💰 ` +
+          "What is the bouquet for—birthday, anniversary, graduation, Valentine's, wedding, or just because?";
+        newContext.stage = "discover";
+        newContext.topic = "occasion";
+      }
+    } else if (
+      currentContext.stage === "discover" &&
+      (detectedOccasion ||
+        detectedStyle ||
+        detectedRecipient ||
+        detectedFlower)
+    ) {
+      // A recipient such as "girlfriend" also gives us a useful romantic signal.
+      const contextualStyle =
+        mergedStyle ||
+        (mergedRecipient === "someone special" ? "romantic" : null);
 
+      newContext.style = contextualStyle;
+
+      if (!mergedOccasion && !mergedStyle && !detectedFlower) {
+        response =
+          "Got it! 🌷 Who is the bouquet for, or what feeling do you want it to have?";
+        newContext.stage = "understand";
+        newContext.topic = "recipient";
+      } else if (!contextualStyle && !mergedFlower) {
+        response =
+          `Got it! 🌷 ${
+            AI_OCCASIONS[mergedOccasion]?.label
+              ? `This is for ${AI_OCCASIONS[mergedOccasion].label}. `
+              : ""
+          }What feeling do you want—romantic, soft, elegant, or cheerful?`;
         newContext.stage = "understand";
         newContext.topic = "style";
       } else {
         newContext.stage = "recommend";
         newContext.topic = "recommend";
       }
-    }
-
-    /*
-     * Priority 5: identify missing information during the understanding stage.
-     */
-    else if (
+    } else if (
       currentContext.stage === "understand" ||
       currentContext.stage === "discover"
     ) {
       if (!mergedOccasion) {
         response =
           "I'd love to help! 🌷 What is the bouquet for—birthday, anniversary, graduation, Valentine's, wedding, or just because?";
-
         newContext.stage = "discover";
         newContext.topic = "occasion";
       } else if (!mergedStyle && !mergedFlower) {
         response =
           `Nice! 💐 For ${AI_OCCASIONS[mergedOccasion]?.label || "that occasion"}, ` +
-          `what style do you prefer: romantic, soft, elegant, or cheerful?`;
-
+          "what style do you prefer: romantic, soft, elegant, or cheerful?";
         newContext.stage = "understand";
         newContext.topic = "style";
       } else if (mentionsBudget && mergedBudget === null) {
         response =
-          "Absolutely! 💰 What budget would you like me to stay around? You can say something like ₱700 or ₱1,000.";
-
+          "Sure! 💰 What budget would you like me to stay within? For example, ₱700 or ₱1,000.";
         newContext.stage = "understand";
         newContext.topic = "budget";
       } else {
@@ -864,142 +1086,69 @@ function BouquetCustomizer() {
       }
     }
 
-    /*
-     * Priority 6: generate the recommendation once enough information exists.
-     */
-    else if (
-      currentContext.stage === "recommend" ||
-      detectedOccasion ||
-      detectedStyle ||
-      detectedFlower ||
-      detectedBudget !== null
+    if (
+      !response &&
+      (currentContext.stage === "recommend" ||
+        detectedOccasion ||
+        detectedStyle ||
+        detectedFlower ||
+        detectedBudget !== null)
     ) {
-      const occasion =
-        mergedOccasion || "just_because";
-
-      const style =
-        mergedStyle ||
-        AI_OCCASIONS[occasion]?.styles?.[0] ||
-        "soft";
-
-      const recommendedFlowers = aiRecommendFlowers({
-        occasion,
-        style,
+      const recommendation = aiBuildRecommendation({
+        occasion: mergedOccasion,
+        style: mergedStyle,
         budget: mergedBudget,
-        selectedFlowers: currentFlowerKeys,
         preferredFlower: mergedFlower,
+        selectedFlowers: currentFlowerKeys,
+        template,
+        size: mergedSize,
+        wrapper: mergedWrapper,
       });
 
-      const wrapper =
-        mergedWrapper ||
-        aiGetRecommendedWrapper(style);
-
-      const size = mergedSize || "Medium";
-
-      response = aiFormatRecommendation({
-        occasion,
-        style,
-        flowers:
-          recommendedFlowers.length
-            ? recommendedFlowers
-            : ["rose", "carnation"],
-        wrapper,
-        size,
-        budget: mergedBudget,
-      });
-
-      response +=
-        "\n\nWould you like me to use this recommendation for your bouquet? 💐";
+      response =
+        aiFormatRecommendation(recommendation, mergedBudget) +
+        "\n\nWould you like me to use this recommendation? 💐";
 
       newContext = {
         ...newContext,
         stage: "recommend",
         topic: "recommend",
-        occasion,
-        style,
-        recommendedFlowers:
-          recommendedFlowers.length
-            ? recommendedFlowers
-            : ["rose", "carnation"],
-        wrapper,
-        size,
+        occasion: recommendation.occasion,
+        style: recommendation.style,
+        recommendedFlowers: recommendation.flowers,
+        wrapper: recommendation.wrapper,
+        size: recommendation.size,
       };
     }
 
-    /*
-     * Priority 7: refine a recommendation without restarting the conversation.
-     */
-    else if (
-      currentContext.stage === "refine" ||
-      currentContext.stage === "review"
-    ) {
-      if (detectedFlower) {
-        response =
-          `${AI_FLOWER_DATA[detectedFlower].name} are ₱${AI_FLOWER_DATA[detectedFlower].price} each. 🌷 ` +
-          `They can be added to your current bouquet.`;
-
-        newContext.preferredFlower = detectedFlower;
-        newContext.topic = "flower";
-        newContext.stage = "refine";
-      } else if (detectedSize) {
-        response =
-          `${detectedSize} works! 🌸 ` +
-          `${detectedSize === "Small"
-            ? "It keeps the arrangement compact and simple."
-            : detectedSize === "Medium"
-              ? "It gives you a balanced amount of room for the flowers."
-              : "It gives you more room for a fuller arrangement."
-          }`;
-
+    if (!response && (detectedSize || detectedWrapper || detectedFlower || detectedStyle)) {
+      if (detectedSize) {
         setSelectedPaperSize(detectedSize);
-
         newContext.size = detectedSize;
-        newContext.topic = "size";
-        newContext.stage = "refine";
+        response = `Done! 🌸 I set the paper size to ${detectedSize}.`;
       } else if (detectedWrapper) {
         const wrapper = AI_WRAPPERS[detectedWrapper];
-
-        response =
-          `${wrapper.name} costs ₱${wrapper.price} and gives the bouquet a ` +
-          `${wrapper.styles[0]} presentation. 🎀`;
-
         setSelectedPaper(wrapper.name);
-
         newContext.wrapper = detectedWrapper;
-        newContext.topic = "wrapper";
-        newContext.stage = "refine";
-      } else if (detectedBudget !== null || mentionsBudget) {
-        if (detectedBudget !== null) {
-          response =
-            `Got it! 💰 I'll keep your ₱${detectedBudget} budget in mind. ` +
-            `Would you like me to create a more budget-conscious recommendation?`;
-
-          newContext.budget = detectedBudget;
-          newContext.stage = "recommend";
-          newContext.topic = "recommend";
-        } else {
-          response =
-            "Sure! 💰 Tell me the maximum amount you'd like to spend, and I'll keep the recommendation around that range.";
-
-          newContext.topic = "budget";
-        }
-      } else {
+        response = `Done! 🎀 I set the wrapper to ${wrapper.name} (+₱${wrapper.price}).`;
+      } else if (detectedFlower) {
+        const flower = AI_FLOWER_DATA[detectedFlower];
+        newContext.preferredFlower = detectedFlower;
         response =
-          "We can still refine it. 🌷 Tell me what you'd like to change—flowers, style, size, wrapper, or budget.";
-
-        newContext.topic = "refine";
-        newContext.stage = "refine";
+          `${flower.singular} is ₱${flower.price} each. 🌷 ` +
+          "If you'd like, I can also build a recommendation around it.";
+      } else if (detectedStyle) {
+        newContext.style = detectedStyle;
+        response =
+          `A ${AI_PROFILES[detectedStyle].label} style sounds lovely. ✨ ` +
+          "Tell me the occasion or budget and I can make a more specific recommendation.";
       }
     }
 
-    /*
-     * Final fallback.
-     */
-    else {
+    if (!response) {
       response =
-        "I can help you design the bouquet step by step. 🌷 " +
-        "Tell me the occasion, style, favorite flower, or budget, and I'll build a recommendation around it.";
-
+        "I can help with bouquet prices, flowers, sizes, wrappers, extras, your current total, or recommendations. 🌷 " +
+        "What would you like to know?";
       newContext.stage = "discover";
       newContext.topic = "occasion";
     }
@@ -1009,17 +1158,10 @@ function BouquetCustomizer() {
 
     setMessages((prev) => [
       ...prev,
-      {
-        sender: "user",
-        text: userMessage,
-      },
-      {
-        sender: "bot",
-        text: response,
-      },
+      { sender: "user", text: userMessage },
+      { sender: "bot", text: response },
     ]);
   }
-
 
   const template = templates.find((item) => item.id === templateId);
 
