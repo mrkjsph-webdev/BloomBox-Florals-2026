@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2026 at 08:43 AM
+-- Generation Time: Sep 29, 2026 at 09:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,23 +74,8 @@ CREATE TABLE `delivery_rider` (
 --
 
 INSERT INTO `delivery_rider` (`rider_id`, `google_id`, `firebase_uid`, `name`, `hash_password`, `email`, `pfp`, `contact_number`, `created_at`, `last_login`) VALUES
-(1, NULL, NULL, 'Jane Smith', '$2y$10$FZLgh.uKlrQAX08RlLO2p.KI8Ujk.f1JixE0I6HvF/EgWsYEodgye', 'janesmith@gmail.com', NULL, NULL, '2026-09-25 18:38:23', '2026-09-25 18:51:52'),
-(2, '107249032175830184497', 'HM7fPKSWfmMyRo7EfCB4GoiqFX22', 'lemon', NULL, 'lemon249512@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLKGvhQcjhxQHL6DsTnTujbYjcHr2Py8CAd-WfNfZme_CdF7xQ=s96-c', NULL, '2026-09-25 18:57:31', '2026-09-29 13:41:42');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_details`
---
-
-CREATE TABLE `order_details` (
-  `details_id` int(11) NOT NULL,
-  `rider_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total_price` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1, NULL, NULL, 'Jane Smith', '$2y$10$FZLgh.uKlrQAX08RlLO2p.KI8Ujk.f1JixE0I6HvF/EgWsYEodgye', 'janesmith@gmail.com', NULL, NULL, '2026-09-25 18:38:23', '2026-09-29 14:49:27'),
+(2, '107249032175830184497', 'HM7fPKSWfmMyRo7EfCB4GoiqFX22', 'lemon', NULL, 'lemon249512@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLKGvhQcjhxQHL6DsTnTujbYjcHr2Py8CAd-WfNfZme_CdF7xQ=s96-c', NULL, '2026-09-25 18:57:31', '2026-09-29 15:23:16');
 
 -- --------------------------------------------------------
 
@@ -106,6 +91,13 @@ CREATE TABLE `review_order` (
   `review_comment` text DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review_order`
+--
+
+INSERT INTO `review_order` (`review_id`, `rider_id`, `order_id`, `rating`, `review_comment`, `created_at`) VALUES
+(1, 2, 22, 4, 'Amazing!!!', '2026-09-29 14:45:54');
 
 --
 -- Indexes for dumped tables
@@ -127,13 +119,6 @@ ALTER TABLE `delivery_rider`
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `google_id` (`google_id`),
   ADD UNIQUE KEY `firebase_uid` (`firebase_uid`);
-
---
--- Indexes for table `order_details`
---
-ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`details_id`),
-  ADD KEY `fk_order_details_rider` (`rider_id`);
 
 --
 -- Indexes for table `review_order`
@@ -160,16 +145,10 @@ ALTER TABLE `delivery_rider`
   MODIFY `rider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `order_details`
---
-ALTER TABLE `order_details`
-  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `review_order`
 --
 ALTER TABLE `review_order`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -180,12 +159,6 @@ ALTER TABLE `review_order`
 --
 ALTER TABLE `delivery_orders`
   ADD CONSTRAINT `fk_delivery_rider` FOREIGN KEY (`rider_id`) REFERENCES `delivery_rider` (`rider_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `order_details`
---
-ALTER TABLE `order_details`
-  ADD CONSTRAINT `fk_order_details_rider` FOREIGN KEY (`rider_id`) REFERENCES `delivery_rider` (`rider_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review_order`
