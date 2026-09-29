@@ -1,0 +1,354 @@
+/* =========================================================
+   BLOOMBOX FLOWER DETAILS
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  --burgundy: #773448;
+  --burgundy-dark: #542432;
+  --burgundy-light: #f4e9ec;
+
+  --cream: #f7f0e4;
+  --cream-dark: #ece1d1;
+
+  --green: #19864b;
+  --gold: #faa507;
+
+  --text: #211b1d;
+  --muted: #777074;
+  --border: #ddd4ce;
+}
+
+/* PAGE */
+
+.bloombox-wrapper {
+  min-height: 100vh;
+  background: #fcfaf7;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.bloombox-wrapper .container {
+  max-width: 1180px;
+}
+
+.bloombox-wrapper main.container {
+  padding-top: 38px !important;
+  padding-bottom: 65px !important;
+}
+
+.bloombox-wrapper .row.g-5 {
+  --bs-gutter-x: 42px;
+}
+
+/* =========================================================
+   MAIN PRODUCT IMAGE
+   ========================================================= */
+
+.main-image-wrapper {
+  height: 430px !important;
+  min-height: 430px;
+
+  background: var(--cream) !important;
+  border: none !important;
+  border-radius: 10px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.main-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Placeholder */
+
+.main-image-wrapper svg,
+.main-image-wrapper .placeholder {
+  color: var(--burgundy);
+}
+
+/* =========================================================
+   THUMBNAILS
+   ========================================================= */
+
+.thumb-btn {
+  width: 82px !important;
+  height: 82px !important;
+
+  padding: 5px !important;
+
+  background: var(--cream) !important;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+
+  overflow: hidden;
+}
+
+.thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumb-btn:hover {
+  border-color: var(--burgundy) !important;
+}
+
+.active-thumb {
+  border: 2px solid var(--burgundy) !important;
+  background: white !important;
+}
+
+/* =========================================================
+   PRODUCT DETAILS
+   ========================================================= */
+
+.product-details h1,
+.product-details .display-5 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 39px !important;
+  line-height: 1.1;
+  font-weight: 600 !important;
+  color: var(--text);
+}
+
+.product-category,
+.text-muted {
+  color: var(--muted) !important;
+}
+
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+
+  margin-left: 8px;
+  padding: 3px 8px;
+
+  border: 1px solid var(--green);
+  border-radius: 20px;
+
+  color: var(--green);
+  background: rgba(25,134,75,.04);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   RATING
+   ========================================================= */
+
+.rating-stars,
+.text-warning {
+  color: var(--gold) !important;
+}
+
+/* =========================================================
+   DESIGN YOUR BOUQUET BUTTON
+   ========================================================= */
+
+.btn-design-bouquet {
+  background: var(--burgundy) !important;
+  border: 1px solid var(--burgundy) !important;
+  color: white !important;
+
+  padding: 10px 24px !important;
+
+  font-size: 12px !important;
+  font-weight: 700 !important;
+
+  transition: .2s;
+}
+
+.btn-design-bouquet:hover {
+  background: var(--burgundy-dark) !important;
+  border-color: var(--burgundy-dark) !important;
+  color: white !important;
+}
+
+/* =========================================================
+   OPTION BUTTONS
+   ========================================================= */
+
+.btn-pill,
+.btn-outline-custom {
+  border-radius: 20px !important;
+  border: 1px solid var(--border) !important;
+
+  background: white !important;
+  color: var(--text) !important;
+
+  padding: 8px 15px !important;
+  font-size: 12px !important;
+}
+
+.btn-pill:hover,
+.btn-outline-custom:hover {
+  border-color: var(--burgundy) !important;
+}
+
+.btn-burgundy,
+.btn-pill.active,
+.btn-outline-custom.active {
+  background: var(--burgundy) !important;
+  border-color: var(--burgundy) !important;
+  color: white !important;
+}
+
+/* =========================================================
+   COLOR DOTS
+   ========================================================= */
+
+.color-dot-btn {
+  width: 18px !important;
+  height: 18px !important;
+
+  padding: 0 !important;
+
+  border-radius: 50% !important;
+  border: 2px solid white !important;
+
+  box-shadow: 0 0 0 1px #d5cfca;
+
+  transition: transform .15s;
+}
+
+.color-dot-btn:hover {
+  transform: scale(1.15);
+}
+
+.color-dot-btn.active {
+  box-shadow: 0 0 0 2px var(--burgundy);
+}
+
+.color-dot-btn.selected {
+  border: 3px solid #4caf50 !important;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #4caf50;
+}
+
+/* =========================================================
+   DESCRIPTION / SPECIFICATIONS
+   ========================================================= */
+
+.product-tabs {
+  margin-top: 35px !important;
+}
+
+.tab-btn {
+  background: transparent !important;
+  border: none !important;
+
+  border-bottom: 2px solid transparent !important;
+
+  padding: 10px 0 !important;
+  margin-right: 28px;
+
+  color: var(--muted) !important;
+
+  font-size: 12px !important;
+}
+
+.tab-btn.active {
+  color: var(--burgundy) !important;
+  border-bottom-color: var(--burgundy) !important;
+  font-weight: 700;
+}
+
+.tab-body {
+  padding-top: 13px;
+
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.bloombox-footer {
+  margin-top: 0 !important;
+
+  background: var(--burgundy-dark) !important;
+  color: white !important;
+
+  padding: 38px 0 !important;
+}
+
+.bloombox-footer h4,
+.bloombox-footer h5 {
+  color: white !important;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.bloombox-footer p,
+.bloombox-footer a {
+  color: #dbcdd1 !important;
+  font-size: 11px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991px) {
+  .main-image-wrapper {
+    height: 400px !important;
+  }
+
+  .product-details h1,
+  .product-details .display-5 {
+    font-size: 34px !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .bloombox-header {
+    height: auto;
+    min-height: 58px;
+  }
+
+  .main-image-wrapper {
+    height: 330px !important;
+    min-height: 330px;
+  }
+
+  .product-details h1,
+  .product-details .display-5 {
+    font-size: 30px !important;
+  }
+
+  .thumb-btn {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+
+.cart-icon-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #d62839;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
