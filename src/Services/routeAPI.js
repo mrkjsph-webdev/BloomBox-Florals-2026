@@ -1,16 +1,15 @@
-import { geocodeAddress } from "./geoAPI";
-
 export const SHOP_ADDRESS = "Bacoor, Cavite, Philippines";
 
 export async function getShopLocation() {
-  // Bacoor, Cavite coordinates
+  // Dasmariñas City, Cavite coordinates
   return {
-    latitude: 14.4578,
-    longitude: 120.9406,
-    displayName: "BloomBox Florals, Bacoor, Cavite",
+    latitude: 14.3294,
+
+    longitude: 120.9367,
+
+    displayName: "BloomBox Florals, Dasmariñas City, Cavite",
   };
 }
-
 export async function getRoute(start, destination) {
   if (
     !start ||
