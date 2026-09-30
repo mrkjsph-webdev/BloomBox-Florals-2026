@@ -93,7 +93,17 @@ function MyOrders() {
         return;
       }
 
-      setOrders(Array.isArray(data.orders) ? data.orders : []);
+      const currentOrders = Array.isArray(data.orders)
+        ? data.orders.filter((order) => {
+            const status = String(order.order_status || "")
+              .trim()
+              .toLowerCase();
+
+            return status === "pending" || status === "out for delivery";
+          })
+        : [];
+
+      setOrders(currentOrders);
     } catch (error) {
       console.error("Failed to fetch orders:", error);
 
@@ -249,7 +259,7 @@ function MyOrders() {
               </div>
             ) : orders.length === 0 ? (
               <div className="orders-message">
-                <p>You have no orders yet.</p>
+                <p>You have no current orders.</p>
 
                 <Link to="/home" className="orders-shop-link">
                   Start shopping
