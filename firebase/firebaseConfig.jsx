@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth";
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAqh8WyG5vG6A9ibPKse_pmfX11sui1dhw",
+  apiKey: "",
   authDomain: "bloomboxflorals.firebaseapp.com",
   projectId: "bloomboxflorals",
   storageBucket: "bloomboxflorals.firebasestorage.app",
