@@ -1,0 +1,29 @@
+.map-container {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.leaflet-map {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-control-attribution {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    height: 420px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    height: 350px;
+    border-radius: 10px;
+  }
+}
