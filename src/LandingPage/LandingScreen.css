@@ -1,0 +1,889 @@
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #3b0518;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+}
+
+.hero-section::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.68) 100%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.hero-image {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 56px);
+  min-height: 560px;
+  object-fit: cover;
+  opacity: 0.84;
+}
+
+.hero-text {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  z-index: 3;
+  width: min(540px, 45%);
+  transform: translateY(-50%);
+}
+
+.hero-text h1 {
+  margin: 0 0 20px;
+  font-family: Georgia, serif;
+  font-size: clamp(46px, 4.5vw, 64px);
+  font-weight: 700;
+  line-height: 1.08;
+  color: white;
+}
+
+.hero-text p {
+  max-width: 500px;
+  margin: 0 0 30px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: white;
+}
+
+.hero-text .gold-button {
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hero-sunflower {
+  position: absolute;
+  right: 4%;
+  bottom: -2px;
+  z-index: 2;
+  width: min(38vw, 500px);
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 24px 24px rgba(0, 0, 0, 0.25));
+}
+
+/* =====================================================
+   CATEGORIES SECTION
+===================================================== */
+
+.categories-section {
+  position: relative;
+  width: 100%;
+  padding: 55px 5.5% 60px;
+  background-color: #935466;
+  color: white;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+}
+
+/* ---------------- HEADER ---------------- */
+
+.categories-header {
+  max-width: 900px;
+  margin: 0 auto 35px;
+  text-align: center;
+}
+
+.categories-header p {
+  margin: 0 0 8px;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.categories-header h3 {
+  margin: 0;
+  color: #ffe09a;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+}
+
+/* =====================================================
+   CATEGORY LAYOUT
+===================================================== */
+
+.categories-layout {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1400px;
+  min-height: 540px;
+  margin: 0 auto;
+  gap: 14px;
+}
+
+/* ---------------- TWO CARD COLUMNS ---------------- */
+
+.category-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* =====================================================
+   CATEGORY CARD
+===================================================== */
+
+.category-card {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 0 0 17px 17px;
+  cursor: pointer;
+}
+
+/* IMAGE */
+
+.category-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Zoom image on hover */
+
+.category-card:hover img {
+  transform: scale(1.06);
+}
+
+/* =====================================================
+   IMAGE OVERLAY
+===================================================== */
+
+.category-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.05) 70%
+  );
+}
+
+/* =====================================================
+   CATEGORY TITLE
+===================================================== */
+
+.category-card h3 {
+  position: absolute;
+  left: 25px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  margin: 0;
+  color: white;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* =====================================================
+   CENTER FEATURED CARD
+===================================================== */
+
+.category-featured {
+  flex: 1;
+  min-width: 0;
+  border-radius: 17px;
+}
+
+.category-featured h3 {
+  font-size: 26px;
+}
+
+/* =====================================================
+   LANDING SCREEN
+===================================================== */
+
+.landing-screen {
+  min-height: 100vh;
+  padding-top: 56px;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+.landing-screen > .hero-section,
+.landing-screen > .categories-section,
+.landing-screen > .featured-flowers,
+.landing-screen > .about-section,
+.landing-screen > #faqs,
+.landing-screen > #contact {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.landing-screen .navbar-color {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 64px;
+  z-index: 1030;
+  padding: 8px 5%;
+  background-color: #5d2f3c;
+}
+
+.navbar-color .container-fluid {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+}
+
+.navbar-color .navbar-brand,
+.navbar-color .nav-link,
+.navbar-color .nav-link:visited {
+  color: white;
+}
+
+.navbar-color .navbar-brand {
+  margin-right: 45px;
+  font-family: Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.navbar-color .navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.navbar-color .nav-link {
+  padding: 0.4rem 0;
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.navbar-color .navbar-brand:hover,
+.navbar-color .navbar-brand:focus-visible,
+.navbar-color .navbar-brand:active {
+  color: #ffe09a !important;
+}
+
+.navbar-color .navbar-brand:link,
+.navbar-color .navbar-brand:visited {
+  color: #fff !important;
+}
+
+.navbar-color .nav-link:hover,
+.navbar-color .nav-link:focus-visible,
+.navbar-color .nav-link.active {
+  color: #ffe09a;
+}
+
+.navbar-color .navbar-toggler {
+  border-color: white;
+}
+
+.navbar-color .navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-color .navbar-collapse {
+  background-color: #5d2f3c;
+}
+
+/* =====================================================
+   NAVBAR BUTTONS
+===================================================== */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px !important;
+  margin-left: auto;
+}
+
+.theme-toggle {
+  margin: 0;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-actions .btn {
+  padding: 7px 15px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.navbar-color .btn-outline-danger {
+  color: white;
+  border-color: white;
+}
+
+.navbar-color .btn-outline-danger:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+.landing-screen .gold-button {
+  border: 1px solid #a9823d !important;
+  background-color: #8f6b2f !important;
+  color: #fff8e7 !important;
+  font-weight: 700;
+}
+
+.landing-screen .gold-button:hover,
+.landing-screen .gold-button:focus-visible {
+  border-color: #c09a54 !important;
+  background-color: #a9823d !important;
+  color: #fff8e7 !important;
+}
+
+/* =====================================================
+   OTHER SECTIONS
+===================================================== */
+
+.landing-screen > .about-section,
+.landing-screen > .featured-flowers,
+.landing-screen > #faqs,
+.landing-screen > #contact {
+  scroll-snap-align: start;
+  scroll-margin-top: 64px;
+}
+
+.landing-screen > #contact {
+  background-color: #000;
+}
+
+.landing-screen > #contact > .contact-section {
+  width: 100%;
+  min-height: 100%;
+  background-color: #000;
+}
+
+.landing-screen > #faqs {
+  background-color: #64293a;
+}
+
+.landing-screen > #faqs > .faq-section {
+  width: 100%;
+  min-height: 100%;
+  background-color: #64293a;
+}
+
+/* =====================================================
+   HERO IMAGE
+===================================================== */
+
+.hero-image {
+  opacity: 0.84;
+}
+
+.dark-mode .hero-image {
+  opacity: 1;
+}
+
+.dark-mode .hero-section::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.38) 48%,
+    rgba(0, 0, 0, 0.74) 100%
+  );
+}
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+.landing-screen.dark-mode {
+  background-color: #181114;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .navbar-color {
+  background-color: #24151c;
+}
+
+.landing-screen.dark-mode .navbar-color .navbar-collapse {
+  background-color: #24151c;
+}
+
+.landing-screen.dark-mode .hero-section {
+  background-color: #181114;
+}
+
+.landing-screen.dark-mode .categories-section {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .categories-header p,
+.landing-screen.dark-mode .categories-header h3 {
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .featured-flowers {
+  background-color: #181114;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode .about-section {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode > #faqs,
+.landing-screen.dark-mode > #faqs > .faq-section {
+  background-color: #4b2030;
+  color: #ffffff;
+}
+
+.landing-screen.dark-mode > #contact,
+.landing-screen.dark-mode > #contact > .contact-section {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* =====================================================
+   DARK MODE BORDERS
+===================================================== */
+
+.landing-screen.dark-mode .featured-flowers *,
+.landing-screen.dark-mode .about-section *,
+.landing-screen.dark-mode > #faqs *,
+.landing-screen.dark-mode > #contact * {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* =====================================================
+   DARK MODE FEATURED FLOWERS
+===================================================== */
+
+.landing-screen.dark-mode .featured-flowers .card,
+.landing-screen.dark-mode .featured-flowers .flower-card {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+/* =====================================================
+   DARK MODE SEARCH / FILTER
+===================================================== */
+
+.landing-screen.dark-mode .featured-flowers input,
+.landing-screen.dark-mode .featured-flowers select {
+  background-color: #24151c;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.landing-screen.dark-mode .featured-flowers input::placeholder {
+  color: #cccccc;
+}
+
+.landing-screen.dark-mode .featured-flowers option {
+  background-color: #24151c;
+  color: #ffffff;
+}
+
+/* =====================================================
+   DARK MODE TEXT
+===================================================== */
+
+.landing-screen.dark-mode .featured-flowers h1,
+.landing-screen.dark-mode .featured-flowers h2,
+.landing-screen.dark-mode .featured-flowers h3,
+.landing-screen.dark-mode .featured-flowers h4,
+.landing-screen.dark-mode .featured-flowers h5,
+.landing-screen.dark-mode .featured-flowers h6,
+.landing-screen.dark-mode .featured-flowers p,
+.landing-screen.dark-mode .about-section h1,
+.landing-screen.dark-mode .about-section h2,
+.landing-screen.dark-mode .about-section h3,
+.landing-screen.dark-mode .about-section h4,
+.landing-screen.dark-mode .about-section h5,
+.landing-screen.dark-mode .about-section h6,
+.landing-screen.dark-mode .about-section p {
+  color: #ffffff;
+}
+
+/* =====================================================
+   DARK MODE FAQ
+===================================================== */
+
+.dark-mode .landing-screen > #faqs {
+  background-color: #4b2030;
+}
+
+.dark-mode .landing-screen > #faqs > .faq-section {
+  background-color: #4b2030;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 991px) {
+  /* NAVBAR */
+
+  .landing-screen .navbar-color {
+    padding: 7px 4%;
+  }
+
+  .navbar-color .navbar-collapse {
+    flex-basis: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  .navbar-color .navbar-nav {
+    width: 100%;
+    gap: 0.15rem;
+  }
+
+  .navbar-color .nav-link {
+    padding: 0.55rem 0.75rem;
+    border-radius: 0.35rem;
+    line-height: 1.25;
+  }
+
+  .navbar-color .nav-link:hover,
+  .navbar-color .nav-link:focus-visible {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .navbar-actions {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar-actions .btn,
+  .navbar-actions .theme-toggle {
+    flex: 0 0 auto;
+  }
+
+  /* HERO */
+
+  .hero-image {
+    height: 550px;
+    min-height: 0;
+  }
+
+  .hero-text {
+    left: 7%;
+    width: min(450px, 55%);
+  }
+
+  .hero-text h1 {
+    margin-bottom: 17px;
+    font-size: 42px;
+  }
+
+  .hero-text p {
+    margin-bottom: 25px;
+    font-size: 16px;
+  }
+
+  .hero-sunflower {
+    right: 1%;
+    width: min(36vw, 330px);
+  }
+
+  /* CATEGORIES */
+
+  .categories-section {
+    padding: 50px 4% 55px;
+  }
+
+  .categories-header {
+    margin-bottom: 30px;
+  }
+
+  .categories-header p {
+    font-size: 21px;
+  }
+
+  .categories-header h3 {
+    font-size: 27px;
+  }
+
+  .categories-layout {
+    min-height: 500px;
+    gap: 10px;
+  }
+
+  .category-column {
+    gap: 10px;
+  }
+
+  .category-card h3 {
+    left: 18px;
+    bottom: 17px;
+    font-size: 20px;
+  }
+
+  .category-featured h3 {
+    font-size: 22px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .landing-screen {
+    padding-top: 56px;
+  }
+
+  /* NAVBAR */
+
+  .landing-screen .navbar-color {
+    min-height: 56px;
+    padding: 6px 5%;
+  }
+
+  .navbar-color .container-fluid {
+    min-height: 44px;
+  }
+
+  .navbar-color .navbar-brand {
+    margin-right: 0;
+    font-size: 1.2rem;
+  }
+
+  .navbar-color .navbar-toggler {
+    padding: 0.3rem 0.5rem;
+  }
+
+  .navbar-color .navbar-collapse {
+    max-height: calc(100vh - 5.5rem);
+    margin-top: 5px;
+    padding: 8px;
+    overflow-y: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+  }
+
+  .navbar-color .navbar-nav {
+    width: 100%;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .navbar-color .nav-link {
+    width: 100%;
+    padding: 8px 10px;
+  }
+
+  .navbar-actions {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 10px;
+    gap: 7px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar-actions .btn,
+  .navbar-actions .theme-toggle {
+    flex: 0 0 auto;
+  }
+
+  .theme-toggle {
+    margin: 0.5rem 0;
+  }
+
+  /* HERO */
+
+  .hero-image {
+    height: 500px;
+  }
+
+  .hero-text {
+    left: 7%;
+    top: 46%;
+    width: 82%;
+  }
+
+  .hero-text h1 {
+    margin-bottom: 14px;
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .hero-text p {
+    margin-bottom: 22px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .hero-text .gold-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .hero-sunflower {
+    right: -5%;
+    bottom: -2px;
+    width: min(44vw, 225px);
+  }
+
+  /* CATEGORIES */
+
+  .categories-section {
+    padding: 45px 20px 50px;
+  }
+
+  .categories-header {
+    margin-bottom: 25px;
+  }
+
+  .categories-header p {
+    font-size: 20px;
+  }
+
+  .categories-header h3 {
+    font-size: 25px;
+    line-height: 1.3;
+  }
+
+  .categories-layout {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    gap: 12px;
+  }
+
+  .category-column {
+    width: 100%;
+    height: auto;
+    gap: 12px;
+  }
+
+  .category-card {
+    width: 100%;
+    height: 250px;
+    flex: none;
+    border-radius: 0 0 17px 17px;
+  }
+
+  .category-featured {
+    width: 100%;
+    height: 300px;
+    flex: none;
+    border-radius: 17px;
+  }
+
+  .category-card h3 {
+    left: 18px;
+    right: 15px;
+    bottom: 17px;
+    font-size: 21px;
+  }
+
+  .category-featured h3 {
+    font-size: 22px;
+  }
+}
+
+/* =====================================================
+   EXTRA SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+  .hero-image {
+    height: 460px;
+  }
+
+  .hero-text {
+    left: 6%;
+    width: 87%;
+  }
+
+  .hero-text h1 {
+    font-size: 32px;
+  }
+
+  .hero-text p {
+    font-size: 14px;
+  }
+
+  .hero-sunflower {
+    width: 165px;
+  }
+
+  .categories-section {
+    padding: 40px 16px 45px;
+  }
+
+  .categories-header h3 {
+    font-size: 23px;
+  }
+
+  .category-card {
+    height: 220px;
+  }
+
+  .category-featured {
+    height: 270px;
+  }
+}
+
+/* =====================================================
+   SCROLL SNAP
+===================================================== */
+
+@media (min-width: 769px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
